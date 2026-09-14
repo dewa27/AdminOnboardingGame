@@ -1,0 +1,79 @@
+{
+  "group_id": "84826e11-0656-4dfb-ab40-efbe7e9f0138",
+  "states": [
+    {
+      "character": {
+        "id": "1dea07a1-f8f7-4526-a03b-3d95e0e87a21",
+        "name": "Idle",
+        "prompt": "A young office admin worker, early 20s, south-facing, standing pose. Short neat black hair, light-medium skin tone, friendly neutral expression. Wearing a simple light blue collared short-sleeve shirt tucked into dark navy slacks, with a plain white lanyard/ID badge around the neck. Black flat shoes. No accessories on hands. Muted, soft color palette matching a cozy office pixel art style (light blue, navy, cream, black outlines), clean pixel art with subtle shading, no strong shadows, casual professional look suitable for a small office environment",
+        "size": {
+          "width": 64,
+          "height": 64
+        },
+        "template_id": "mannequin",
+        "directions": 8,
+        "view": "low top-down",
+        "created_at": "2026-09-14T03:07:35.925134+00:00"
+      },
+      "folder": "Idle",
+      "frames": {
+        "rotations": {
+          "south": "Idle/rotations/south.png",
+          "south-east": "Idle/rotations/south-east.png",
+          "east": "Idle/rotations/east.png",
+          "north-east": "Idle/rotations/north-east.png",
+          "north": "Idle/rotations/north.png",
+          "north-west": "Idle/rotations/north-west.png",
+          "west": "Idle/rotations/west.png",
+          "south-west": "Idle/rotations/south-west.png"
+        },
+        "animations": {
+          "walking": {
+            "west": [
+              "Idle/animations/walking/west/frame_000.png",
+              "Idle/animations/walking/west/frame_001.png",
+              "Idle/animations/walking/west/frame_002.png",
+              "Idle/animations/walking/west/frame_003.png",
+              "Idle/animations/walking/west/frame_004.png",
+              "Idle/animations/walking/west/frame_005.png",
+              "Idle/animations/walking/west/frame_006.png",
+              "Idle/animations/walking/west/frame_007.png"
+            ],
+            "east": [
+              "Idle/animations/walking/east/frame_000.png",
+              "Idle/animations/walking/east/frame_001.png",
+              "Idle/animations/walking/east/frame_002.png",
+              "Idle/animations/walking/east/frame_003.png",
+              "Idle/animations/walking/east/frame_004.png",
+              "Idle/animations/walking/east/frame_005.png",
+              "Idle/animations/walking/east/frame_006.png",
+              "Idle/animations/walking/east/frame_007.png"
+            ],
+            "south": [
+              "Idle/animations/walking/south/frame_000.png",
+              "Idle/animations/walking/south/frame_001.png",
+              "Idle/animations/walking/south/frame_002.png",
+              "Idle/animations/walking/south/frame_003.png",
+              "Idle/animations/walking/south/frame_004.png",
+              "Idle/animations/walking/south/frame_005.png",
+              "Idle/animations/walking/south/frame_006.png",
+              "Idle/animations/walking/south/frame_007.png"
+            ],
+            "north": [
+              "Idle/animations/walking/north/frame_000.png",
+              "Idle/animations/walking/north/frame_001.png",
+              "Idle/animations/walking/north/frame_002.png",
+              "Idle/animations/walking/north/frame_003.png",
+              "Idle/animations/walking/north/frame_004.png",
+              "Idle/animations/walking/north/frame_005.png",
+              "Idle/animations/walking/north/frame_006.png",
+              "Idle/animations/walking/north/frame_007.png"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "export_version": "3.1",
+  "export_date": "2026-09-14T03:22:53.146408"
+}

@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Timedoor Academy: Admin Onboarding Simulator</title>
+<style>
+  :root{
+    --ink:#1a1a2e;
+    --panel:#f4f1de;
+    --teal:#4ecdc4;
+    --teal-dark:#2f9c94;
+    --red:#ff6b6b;
+    --yellow:#ffd166;
+    --green:#06d6a0;
+    --line:#0f0f1c;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    min-height:100vh;
+    background:var(--ink);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Courier New', monospace;
+    color:var(--panel);
+    padding:16px;
+  }
+  #root{
+    width:100%;
+    max-width:720px;
+  }
+  .game-frame{
+    background:#22223b;
+    border:4px solid var(--line);
+    border-radius:8px;
+    box-shadow:0 0 0 4px var(--teal-dark), 8px 8px 0 rgba(0,0,0,.4);
+    overflow:hidden;
+  }
+  .topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:10px 14px;
+    background:var(--line);
+    font-weight:bold;
+    letter-spacing:1px;
+    font-size:12px;
+  }
+  .topbar span.badge{
+    background:var(--teal);
+    color:var(--line);
+    padding:3px 8px;
+    border-radius:3px;
+  }
+  .scene{
+    position:relative;
+    height:260px;
+    background:linear-gradient(180deg,#2a2a4a 0%, #24243d 60%, #1c1c30 100%);
+    overflow:hidden;
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+    padding-bottom:0;
+  }
+  .floor{
+    position:absolute;
+    bottom:0;left:0;right:0;
+    height:70px;
+    background:repeating-linear-gradient(90deg,#3a3a5c 0 40px, #34345190 40px 80px);
+    border-top:3px solid var(--line);
+  }
+  .actor{
+    position:absolute;
+    bottom:70px;
+    width:38px;
+    height:56px;
+    transition:left .5s ease;
+  }
+  .actor .body{
+    width:100%;height:100%;
+    border:3px solid var(--line);
+    border-radius:4px;
+  }
+  .actor.player .body{background:var(--teal);}
+  .actor.npc .body{background:var(--yellow);}
+  .actor .label{
+    position:absolute;
+    top:-18px;left:50%;
+    transform:translateX(-50%);
+    font-size:9px;
+    white-space:nowrap;
+    background:var(--line);
+    padding:1px 4px;
+    border-radius:3px;
+  }
+  .station{
+    position:absolute;
+    bottom:70px;
+    width:56px;
+    height:44px;
+    border:3px solid var(--line);
+    border-radius:4px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:20px;
+    cursor:pointer;
+  }
+  .station .label{
+    position:absolute;
+    bottom:-16px;
+    font-size:8px;
+    white-space:nowrap;
+    background:var(--line);
+    padding:1px 4px;
+    border-radius:3px;
+  }
+  .station.active{box-shadow:0 0 0 3px var(--green);}
+  .station.done{opacity:.45;}
+
+  .dialogue-box{
+    background:var(--panel);
+    color:var(--line);
+    padding:14px 16px;
+    min-height:120px;
+    border-top:4px solid var(--line);
+  }
+  .dialogue-speaker{
+    font-weight:bold;
+    font-size:12px;
+    letter-spacing:1px;
+    color:var(--teal-dark);
+    margin-bottom:6px;
+  }
+  .dialogue-text{
+    font-size:13px;
+    line-height:1.5;
+    margin-bottom:12px;
+    min-height:38px;
+  }
+  .dialogue-actions{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  button.choice{
+    font-family:inherit;
+    text-align:left;
+    background:#fff;
+    border:2px solid var(--line);
+    border-radius:4px;
+    padding:9px 12px;
+    font-size:12.5px;
+    cursor:pointer;
+    line-height:1.4;
+    transition:transform .08s ease, background .12s ease;
+  }
+  button.choice:hover{background:var(--teal); }
+  button.choice:active{transform:translateY(1px);}
+  button.choice.report{border-color:var(--yellow); }
+  button.primary{
+    align-self:flex-start;
+    background:var(--teal-dark);
+    color:#fff;
+    border:2px solid var(--line);
+    border-radius:4px;
+    padding:9px 16px;
+    font-size:12.5px;
+    cursor:pointer;
+    font-weight:bold;
+  }
+  button.primary:hover{background:var(--teal);}
+
+  .checklist-modal{
+    background:#fff;
+    border:2px solid var(--line);
+    border-radius:4px;
+    padding:10px;
+    margin-bottom:10px;
+  }
+  .checklist-item{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:8px 6px;
+    border-bottom:1px dashed #ccc;
+    font-size:12.5px;
+  }
+  .checklist-item:last-child{border-bottom:none;}
+  .checklist-item .item-name{flex:1;}
+  .status-tag{
+    font-size:10px;
+    font-weight:bold;
+    padding:2px 6px;
+    border-radius:3px;
+    margin-left:6px;
+  }
+  .status-tag.ok{background:var(--green); color:#053;}
+  .status-tag.report{background:var(--yellow); color:#532;}
+  .status-tag.pending{background:#ddd; color:#555;}
+  .mini-btn{
+    font-family:inherit;
+    font-size:10.5px;
+    padding:4px 7px;
+    border:2px solid var(--line);
+    border-radius:3px;
+    background:#fff;
+    cursor:pointer;
+    margin-left:4px;
+  }
+  .mini-btn:hover{background:var(--teal);}
+  .mini-btn.report-btn:hover{background:var(--yellow);}
+
+  .reason-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    margin-top:6px;
+  }
+
+  .summary-list{
+    font-size:12.5px;
+    margin:0 0 10px 0;
+    padding-left:18px;
+  }
+  .summary-list li{margin-bottom:4px;}
+
+  .chatlog{
+    max-height:150px;
+    overflow-y:auto;
+    margin-bottom:10px;
+    padding-right:4px;
+  }
+  .bubble{
+    max-width:85%;
+    padding:8px 10px;
+    border-radius:8px;
+    font-size:12.5px;
+    line-height:1.4;
+    margin-bottom:8px;
+    border:2px solid var(--line);
+  }
+  .bubble.customer{
+    background:#fff;
+    border-bottom-left-radius:2px;
+    margin-right:auto;
+  }
+  .bubble.admin{
+    background:var(--teal);
+    border-bottom-right-radius:2px;
+    margin-left:auto;
+    text-align:right;
+  }
+  .customer-tag{
+    font-size:10px;
+    font-weight:bold;
+    color:var(--teal-dark);
+    margin-bottom:4px;
+  }
+  .slotbox{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    margin-bottom:10px;
+  }
+  .slot-btn{
+    font-family:inherit;
+    text-align:left;
+    background:#fff;
+    border:2px solid var(--line);
+    border-radius:4px;
+    padding:8px 10px;
+    font-size:12px;
+    cursor:pointer;
+  }
+  .slot-btn .cap{
+    float:right;
+    font-size:10px;
+    font-weight:bold;
+  }
+  .slot-btn:hover{background:var(--teal);}
+  .slot-btn:disabled{
+    opacity:.4;
+    cursor:not-allowed;
+  }
+  .feedback{
+    font-size:11.5px;
+    padding:6px 8px;
+    border-radius:4px;
+    margin-bottom:8px;
+    font-weight:bold;
+  }
+  .feedback.warn{background:var(--yellow); color:#532;}
+  .feedback.bad{background:var(--red); color:#fff;}
+  .feedback.good{background:var(--green); color:#053;}
+  .wa-app{
+    background:#e9edef;
+    color:var(--line);
+  }
+  .wa-tabs{
+    display:flex;
+    gap:6px;
+    padding:8px 8px 0 8px;
+    overflow-x:auto;
+    background:#075e54;
+  }
+  .wa-tab{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:4px;
+    min-width:64px;
+    padding:6px 4px 8px 4px;
+    cursor:pointer;
+    border-radius:6px 6px 0 0;
+    position:relative;
+  }
+  .wa-tab.selected{background:#e9edef;}
+  .wa-tab .avatar{
+    width:30px;height:30px;
+    border-radius:50%;
+    border:2px solid var(--line);
+    display:flex;align-items:center;justify-content:center;
+    font-size:13px;
+    font-weight:bold;
+    background:var(--teal);
+    color:var(--line);
+  }
+  .wa-tab.ended .avatar{ background:#bbb; filter:grayscale(1); opacity:.7;}
+  .wa-tab .name{
+    font-size:9px;
+    color:#fff;
+    white-space:nowrap;
+    max-width:64px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .wa-tab.selected .name{color:var(--line);}
+  .urgency-dot{
+    position:absolute;
+    top:2px; right:8px;
+    width:9px;height:9px;
+    border-radius:50%;
+    border:1.5px solid var(--line);
+  }
+  .urgency-dot.calm{background:var(--green);}
+  .urgency-dot.warn{background:var(--yellow);}
+  .urgency-dot.critical{background:var(--red);}
+  .wa-header{
+    background:#075e54;
+    color:#fff;
+    padding:8px 12px;
+    font-size:12px;
+    font-weight:bold;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+  }
+  .wa-header .patience-label{
+    font-size:10px;
+    font-weight:normal;
+    opacity:.85;
+  }
+  .wa-body{
+    background:#e9edef;
+    padding:10px;
+    height:190px;
+    overflow-y:auto;
+  }
+  .wa-body .bubble.customer{background:#fff;}
+  .wa-body .bubble.admin{background:#d9fdd3;}
+  .wa-body .bubble.system{
+    background:#fef4d8;
+    margin:0 auto 8px auto;
+    text-align:center;
+    font-size:11px;
+    max-width:90%;
+    border-color:var(--yellow);
+  }
+  .wa-reply-area{
+    background:#f0f2f5;
+    padding:10px;
+    border-top:2px solid var(--line);
+  }
+  h1.title{
+    font-size:20px;
+    letter-spacing:1px;
+    margin:0 0 6px 0;
+  }
+  p.sub{font-size:12.5px; opacity:.85; margin:0 0 16px 0;}
+  .start-screen{
+    background:var(--panel);
+    color:var(--line);
+    padding:24px 20px;
+  }
+  .ep-btn{
+    display:block;
+    width:100%;
+    text-align:left;
+    background:#fff;
+    border:2px solid var(--line);
+    border-radius:4px;
+    padding:12px 14px;
+    margin-bottom:10px;
+    font-family:inherit;
+    cursor:pointer;
+  }
+  .ep-btn strong{display:block; font-size:13px; margin-bottom:3px;}
+  .ep-btn span{font-size:11.5px; opacity:.75;}
+  .ep-btn:hover{background:var(--teal);}
+  .footer-note{
+    font-size:10.5px;
+    opacity:.6;
+    text-align:center;
+    margin-top:14px;
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script>
+/* ============================================================
+   GAME STATE
+   ============================================================ */
+const gameState = {
+  episode1: { report: [] },
+  episode2: {
+    slots: {
+      s1: { label: "Sesi 1 — Senin 16:00", cap: 1, used: 0 },
+      s2: { label: "Sesi 2 — Rabu 16:00", cap: 1, used: 0 },
+      s3: { label: "Sesi 3 — Sabtu 10:00", cap: 2, used: 0 }
+    },
+    customers: {}
+  }
+};
+window.gameState = gameState;
+
+const root = document.getElementById('root');
+
+function render(html){ root.innerHTML = html; }
+function frame(topLabel, sceneHtml, dialogueHtml){
+  render(`
+    <div class="game-frame">
+      <div class="topbar"><span>TIMEDOOR ACADEMY — ADMIN SIM</span><span class="badge">${topLabel}</span></div>
+      <div class="scene"><div class="floor"></div>${sceneHtml}</div>
+      <div class="dialogue-box">${dialogueHtml}</div>
+    </div>
+    <p class="footer-note">Prototype visual sederhana — asset akan diupgrade belakangan.</p>
+  `);
+}
+
+/* ============================================================
+   START SCREEN
+   ============================================================ */
+function showStart(){
+  render(`
+    <div class="game-frame">
+      <div class="topbar"><span>TIMEDOOR ACADEMY</span><span class="badge">ADMIN ONBOARDING SIM</span></div>
+      <div class="start-screen">
+        <h1 class="title">Hari Pertama Jadi Admin</h1>
+        <p class="sub">Simulasi peran Admin Cabang Timedoor Academy. Pilih episode untuk mulai.</p>
+        <button class="ep-btn" onclick="startEpisode1()">
+          <strong>Episode 1 — Persiapan Cabang</strong>
+          <span>Checklist kesiapan stationeries, merch, dan ruang kelas.</span>
+        </button>
+        <button class="ep-btn" onclick="startEpisode2()">
+          <strong>Episode 2 — Balas Chat Customer</strong>
+          <span>Layani 4 calon customer, arahkan mereka daftar Free Trial.</span>
+        </button>
+      </div>
+    </div>
+    <p class="footer-note">Prototype visual sederhana — asset akan diupgrade belakangan.</p>
+  `);
+}
+
+/* ============================================================
+   EPISODE 1
+   ============================================================ */
+const ep1Script = [
+  { type:'dialogue', speaker:'Manajer Cabang', text:'Halo! Selamat datang di Timedoor Academy. Kita ini lembaga edtech yang ngajarin coding & teknologi ke anak-anak lewat kelas offline di cabang-cabang, salah satunya di sini.' },
+  { type:'dialogue', speaker:'Manajer Cabang', text:'Sebelum kelas mulai, tugas pertama kamu: pastikan cabang ini siap menyambut siswa. Yuk ikut saya keliling.' },
+  { type:'navigate', target:'meja', label:'Meja Stationeries' },
+  { type:'checklist', mode:'drag', title:'Meja Stationeries', items:[
+      { id:'pulpen', name:'Pulpen' },
+      { id:'kertas', name:'Kertas' }
+    ] },
+  { type:'navigate', target:'rak', label:'Rak Pajangan' },
+  { type:'checklist', mode:'drag', title:'Rak Pajangan Merch', items:[
+      { id:'kaos', name:'Kaos' },
+      { id:'tas', name:'Tas' }
+    ] },
+  { type:'navigate', target:'kelas', label:'Ruang Kelas' },
+  { type:'checklist', mode:'tap', title:'Ruang Kelas', items:[
+      { id:'kursi', name:'Kursi lengkap sesuai kapasitas' },
+      { id:'colokan', name:'Colokan listrik tersedia & berfungsi' },
+      { id:'laptop', name:'Laptop tertata rapi di tiap meja' }
+    ] },
+  { type:'summary' }
+];
+
+let ep1Index = 0;
+let ep1PlayerPos = 40;
+
+const stationPos = { meja: 140, rak: 260, kelas: 380 };
+
+function startEpisode1(){
+  ep1Index = 0;
+  ep1PlayerPos = 40;
+  gameState.episode1.report = [];
+  renderEp1();
+}
+
+function ep1Scene(activeTarget, doneTargets){
+  let stations = '';
+  for(const key in stationPos){
+    const icon = key==='meja' ? '🖊️' : key==='rak' ? '👕' : '🪑';
+    const label = key==='meja' ? 'Meja Stationeries' : key==='rak' ? 'Rak Pajangan' : 'Ruang Kelas';
+    const cls = ['station'];
+    if(key===activeTarget) cls.push('active');
+    if(doneTargets.includes(key)) cls.push('done');
+    stations += `<div class="${cls.join(' ')}" style="left:${stationPos[key]}px" onclick="ep1ClickStation('${key}')">${icon}<span class="label">${label}</span></div>`;
+  }
+  return `
+    ${stations}
+    <div class="actor npc" style="left:60px;"><div class="body"></div><span class="label">Manajer</span></div>
+    <div class="actor player" style="left:${ep1PlayerPos}px;"><div class="body"></div><span class="label">Kamu</span></div>
+  `;
+}
+
+let ep1PendingTarget = null;
+let ep1DoneTargets = [];
+
+function renderEp1(){
+  const step = ep1Script[ep1Index];
+  if(!step){ return renderEp1Summary(); }
+
+  if(step.type === 'dialogue'){
+    frame('EPISODE 1', ep1Scene(null, ep1DoneTargets), `
+      <div class="dialogue-speaker">${step.speaker}</div>
+      <div class="dialogue-text">${step.text}</div>
+      <div class="dialogue-actions">
+        <button class="primary" onclick="ep1Next()">Lanjut</button>
+      </div>
+    `);
+  } else if(step.type === 'navigate'){
+    ep1PendingTarget = step.target;
+    frame('EPISODE 1', ep1Scene(step.target, ep1DoneTargets), `
+      <div class="dialogue-speaker">Petunjuk</div>
+      <div class="dialogue-text">Jalan ke <strong>${step.label}</strong> untuk mengecek kesiapannya. Klik lokasi yang bersinar di atas.</div>
+    `);
+  } else if(step.type === 'checklist'){
+    renderChecklistEp1(step);
+  } else if(step.type === 'summary'){
+    renderEp1Summary();
+  }
+}
+
+function ep1ClickStation(key){
+  if(key !== ep1PendingTarget) return;
+  ep1PlayerPos = stationPos[key] - 20;
+  document.querySelectorAll('.actor.player').forEach(el=> el.style.left = ep1PlayerPos+'px');
+  setTimeout(()=>{
+    ep1DoneTargets.push(key);
+    ep1Next();
+  }, 350);
+}
+
+function ep1Next(){
+  ep1Index++;
+  renderEp1();
+}
+
+function renderChecklistEp1(step){
+  if(!step._state){
+    step._state = {};
+    step.items.forEach(it => step._state[it.id] = { status:'pending', reason:null });
+  }
+  const state = step._state;
+
+  function itemRow(it){
+    const s = state[it.id];
+    let tag = '<span class="status-tag pending">Belum dicek</span>';
+    if(s.status === 'ok') tag = '<span class="status-tag ok">Lengkap</span>';
+    if(s.status === 'reported') tag = `<span class="status-tag report">Dilaporkan: ${s.reason}</span>`;
+
+    let actions = '';
+    if(s.status === 'pending'){
+      actions = `
+        <button class="mini-btn" onclick="ep1SetOk('${step.title}','${it.id}')">Taruh/Cek OK</button>
+        <button class="mini-btn report-btn" onclick="ep1ShowReasons('${step.title}','${it.id}')">Lapor Kondisi</button>
+      `;
+    }
+    let reasonRow = '';
+    if(s.showReasons){
+      reasonRow = `<div class="reason-row">
+        <button class="mini-btn report-btn" onclick="ep1SetReport('${step.title}','${it.id}','Stok kurang')">Stok kurang</button>
+        <button class="mini-btn report-btn" onclick="ep1SetReport('${step.title}','${it.id}','Rusak')">Rusak</button>
+        <button class="mini-btn report-btn" onclick="ep1SetReport('${step.title}','${it.id}','Belum ada')">Belum ada</button>
+      </div>`;
+    }
+    return `<div class="checklist-item">
+      <span class="item-name">${it.name}</span>
+      <span>${tag}${actions}</span>
+    </div>${reasonRow}`;
+  }
+
+  const allDone = step.items.every(it => state[it.id].status !== 'pending');
+
+  frame('EPISODE 1', ep1Scene(null, ep1DoneTargets), `
+    <div class="dialogue-speaker">${step.title}</div>
+    <div class="checklist-modal">
+      ${step.items.map(itemRow).join('')}
+    </div>
+    <div class="dialogue-actions">
+      <button class="primary" ${allDone? '' : 'disabled style="opacity:.4;cursor:not-allowed;"'} onclick="ep1FinishChecklist('${step.title}')">Selesai</button>
+    </div>
+  `);
+
+  window.ep1SetOk = (title, id) => {
+    state[id].status = 'ok';
+    renderEp1();
+  };
+  window.ep1ShowReasons = (title, id) => {
+    state[id].showReasons = true;
+    renderEp1();
+  };
+  window.ep1SetReport = (title, id, reason) => {
+    state[id].status = 'reported';
+    state[id].reason = reason;
+    state[id].showReasons = false;
+    gameState.episode1.report.push({ area: title, item: id, reason });
+    renderEp1();
+  };
+  window.ep1FinishChecklist = () => {
+    ep1Next();
+  };
+}
+
+function renderEp1Summary(){
+  const reportCount = gameState.episode1.report.length;
+  const totalItems = 7;
+  const okCount = totalItems - reportCount;
+  frame('EPISODE 1 SELESAI', ep1Scene(null, ep1DoneTargets), `
+    <div class="dialogue-speaker">Manajer Cabang</div>
+    <div class="dialogue-text">Kerja bagus buat hari pertama! Ini rekap kesiapan cabang:</div>
+    <ul class="summary-list">
+      <li><strong>${okCount}</strong> item lengkap</li>
+      <li><strong>${reportCount}</strong> item dilaporkan${reportCount>0 ? ':' : ''}</li>
+      ${gameState.episode1.report.map(r => `<li>${r.item} (${r.area}) — ${r.reason}</li>`).join('')}
+    </ul>
+    <div class="dialogue-text">${reportCount>0 ? 'Laporan ini otomatis dicatat buat ditindaklanjuti tim Ops. Bagus, jangan pernah diamkan kondisi yang gak sesuai.' : 'Semua kondisi lengkap, mantap!'}</div>
+    <div class="dialogue-actions">
+      <button class="primary" onclick="startEpisode2()">Lanjut ke Episode 2</button>
+      <button class="choice" onclick="showStart()">Kembali ke Menu</button>
+    </div>
+  `);
+}
+
+/* ============================================================
+   EPISODE 2 — CHAT CUSTOMER
+   ============================================================ */
+
+function shuffle(arr){
+  const a = [...arr];
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+// Each customer tree: nodes keyed by id.
+// node.options: [{text, score, next}]
+// node.trial: true marks node where success dialogue leads into scheduling
+// node.fail: 'soft' | 'hard'
+
+const customers = {
+  sarah: {
+    name: 'Ibu Sarah',
+    availability: ['s1','s2'],
+    availLine: 'anaknya sekolah full day, jadi maunya sore hari pas weekday atau weekend santai',
+    start: 'n1',
+    nodes: {
+      n1: {
+        text: 'Halo min, mau tanya untuk anak saya kelas 4 SD ada program coding gak ya?',
+        options: [
+          { text:'Halo Bu Sarah, ada kak. Untuk kelas 4 SD kami punya program coding dasar. Kalau boleh tau, anaknya sebelumnya udah pernah coba coding atau baru mau mulai ya Bu?', score:4, next:'n2a' },
+          { text:'Halo Bu Sarah! Ada kak, untuk anak kelas 4 SD kami punya program coding dasar yang disesuaikan usia. Boleh saya bantu jelaskan detailnya?', score:3, next:'n2b' },
+          { text:'Ada beberapa program, tergantung kebutuhan. Mau yang seperti apa Bu?', score:2, next:'n2c' },
+          { text:'Untuk usia segitu bisa ikut kelas coding umum aja Bu, sama aja.', score:1, next:'n2d' }
+        ]
+      },
+      n2a: {
+        text:'Wah oke, dia baru mau mulai sih min, belum pernah coding sama sekali. Kira kira biayanya berapa ya? Terus jadwalnya fleksibel gak, soalnya anak saya sekolah full day.',
+        options: [
+          { text:'Untuk pemula ada paket dasar mulai harga terjangkau, dan jadwalnya bisa sore hari atau weekend. Kalau Ibu mau, kita coba Free Trial dulu gratis biar tau cocok atau enggak sebelum daftar penuh?', score:4, next:'trial' },
+          { text:'Untuk pemula ada paket dasar dengan harga terjangkau kok Bu.', score:3, next:'n2c' },
+          { text:'Untuk biaya nanti dijelasin CS lain ya Bu.', score:1, next:'fail_soft' }
+        ]
+      },
+      n2b: {
+        text:'Ooh oke. Emang bedanya sama kelas coding yang lain apa ya min?',
+        options: [
+          { text:'Bedanya di kurikulum project based, jadi anak langsung bikin karya nyata, didampingi mentor tetap. Kalau Ibu penasaran, bisa coba Free Trial dulu buat ngerasain langsung.', score:4, next:'trial' },
+          { text:'Kurikulumnya lebih terstruktur sih Bu dibanding tempat lain.', score:3, next:'n2c' },
+          { text:'Sama aja sih Bu, cuma beda nama.', score:2, next:'fail_soft' },
+          { text:'Ohiya Bu, kebetulan lagi ada promo diskon loh!', score:1, next:'fail_hard' }
+        ]
+      },
+      n2c: {
+        text:'Hmm gimana ya, saya kurang paham programnya kayak apa.',
+        options: [
+          { text:'Wajar Bu bingung, saya bantu jelasin ya: anak belajar logika dasar dulu lewat game, baru masuk ke bikin project sederhana. Progressnya keliatan tiap minggu. Mau coba Free Trial dulu Bu?', score:4, next:'trial' },
+          { text:'Jadi anak belajar coding dari dasar Bu, step by step.', score:2, next:'fail_soft' },
+          { text:'Coba dibaca di website aja Bu, lengkap kok infonya.', score:1, next:'fail_hard' }
+        ]
+      },
+      n2d: {
+        text:'Yaudah deh, saya pikir pikir dulu ya.',
+        options: [
+          { text:'Bu, sebelum mikir panjang, gimana kalau coba Free Trial gratis dulu aja? Gak perlu komit apa apa, biar Ibu bisa liat langsung cocok atau enggak buat anak.', score:4, next:'trial' },
+          { text:'Baik Bu, ditunggu ya.', score:2, next:'fail_soft' },
+          { text:'Bu, promo cuma sampai minggu ini loh, sayang kalau kelewat!', score:1, next:'fail_hard' }
+        ]
+      }
+    }
+  },
+
+  doni: {
+    name: 'Pak Doni',
+    availability: ['s2','s3'],
+    availLine: 'sibuk kerja, cuma bisa tengah minggu atau weekend pagi',
+    start: 'n1',
+    nodes: {
+      n1: {
+        text:'Halo, mau tanya program coding di sini. Tapi denger denger mahal ya? Anak saya udah pernah les di tempat lain, kecewa, gak sesuai omongan sales.',
+        options: [
+          { text:'Halo Pak Doni, terima kasih infonya. Saya paham kekhawatiran Bapak setelah pengalaman kurang baik sebelumnya. Boleh saya tau dulu apa yang bikin kecewa waktu itu, biar saya bisa kasih info yang relevan aja buat Bapak?', score:4, next:'n2a' },
+          { text:'Halo Pak Doni, mohon maaf atas pengalaman sebelumnya. Program kami beda kok Pak, kurikulumnya jelas dan hasil belajarnya terukur.', score:3, next:'n2b' },
+          { text:'Halo Pak, untuk harga bisa dicek di website ya, programnya bagus kok.', score:2, next:'fail_soft' },
+          { text:'Semua tempat les emang gitu Pak, tergantung anaknya juga sih.', score:1, next:'fail_hard' }
+        ]
+      },
+      n2a: {
+        text:'Dulu itu katanya ada laporan progress tiap bulan, tapi gak pernah dikasih. Sales-nya juga susah dihubungi pas ada masalah.',
+        options: [
+          { text:'Noted Pak, itu concern yang valid. Di kami ada laporan progress rutin dan Bapak bisa langsung chat admin kapan aja kalau ada kendala, responnya di jam kerja. Kalau Bapak mau, saya bisa tunjukin contoh laporan progressnya?', score:4, next:'n3a' },
+          { text:'Di kami ada laporan progress rutin kok Pak, dan admin selalu responsif.', score:3, next:'n3a' },
+          { text:'Iya Pak macem macem sih tergantung tempatnya.', score:2, next:'fail_soft' },
+          { text:'Kalau gitu nanti dicoba aja dulu Pak, biar tau bedanya.', score:1, next:'fail_hard' }
+        ]
+      },
+      n2b: {
+        text:'Ya udah, tapi saya masih ragu. Coba jelasin lagi kenapa saya harus percaya program ini beda?',
+        options: [
+          { text:'Saya ngerti Pak masih ragu, itu wajar. Bedanya kami kasih laporan progress rutin per bulan dan Bapak bisa pantau langsung, gak cuma janji di depan doang. Boleh saya tunjukin contohnya?', score:4, next:'n3a' },
+          { text:'Kami serius kok Pak sama kualitas, gak akan mengecewakan.', score:2, next:'fail_soft' },
+          { text:'Ya kalau gak percaya juga gapapa Pak, monggo.', score:1, next:'fail_hard' }
+        ]
+      },
+      n3a: {
+        text:'Oke, boleh juga kalau gitu. Tapi soal harga gimana, ada yang lebih murah gak, secara saya udah kapok keluar duit percuma.',
+        options: [
+          { text:'Saya paham Pak. Daripada langsung komit, gimana kalau coba Free Trial dulu gratis, biar Bapak sama anak bisa ngerasain dulu sebelum mutusin lanjut atau enggak?', score:4, next:'trial' },
+          { text:'Untuk harga ada paket dan diskon tertentu kok Pak, saya jelasin ya.', score:2, next:'fail_soft' },
+          { text:'Ini udah harga terbaik kok Pak, gak bisa kurang lagi.', score:1, next:'fail_hard' }
+        ]
+      }
+    }
+  },
+
+  rani: {
+    name: 'Kak Rani',
+    availability: ['s1','s2','s3'],
+    availLine: 'kapan aja bisa, fleksibel banget',
+    start: 'n1',
+    nodes: {
+      n1: {
+        text:'Halo kak, aku mau daftarin adekku les coding. Temenku anaknya udah les di sini katanya bagus. Gimana caranya ya?',
+        options: [
+          { text:'Halo kak Rani! Seneng dengernya, temannya udah ngerasain manfaatnya ya. Untuk daftar, aku bisa langsung bantu kirimin link form-nya sekarang, atau kalau mau ada juga opsi coba Free Trial dulu bareng adeknya. Kak Rani lebih nyaman yang mana?', score:4, next:'n2' },
+          { text:'Halo kak, makasih infonya! Untuk daftar bisa langsung isi form di link ini ya, nanti tim kami hubungi lagi.', score:3, next:'n2' },
+          { text:'Oh gitu, kalau mau daftar tinggal transfer aja terus kirim buktinya.', score:2, next:'fail_soft' },
+          { text:'Baik kak, jadi program kami itu ada banyak tingkatan mulai dari dasar sampai lanjutan, dengan kurikulum project based yang disesuaikan usia, dan juga ada sertifikat di tiap levelnya, mentornya juga berpengalaman semua...', score:1, next:'fail_soft' }
+        ]
+      },
+      n2: {
+        text:'Oh oke! Adekku kelas 5 SD. Terus biayanya berapa kak, terus bisa mulai kapan?',
+        options: [
+          { text:'Untuk kelas 5 SD ada paket coding dasar, biayanya segini ya kak. Kalau mau, kita bisa mulai dari Free Trial gratis minggu ini dulu.', score:4, next:'trial' },
+          { text:'Untuk kelas 5 SD biayanya segini kak, jadwalnya bisa diatur nanti.', score:3, next:'trial' },
+          { text:'Hmm soal biaya itu tergantung banyak faktor sih kak, nanti dihitungin lagi ya.', score:1, next:'fail_soft' }
+        ]
+      }
+    }
+  },
+
+  wati: {
+    name: 'Bu Wati',
+    availability: ['s2'],
+    availLine: 'anaknya cuma kosong hari itu aja, hari lain udah ada les/kegiatan lain',
+    start: 'n1',
+    nodes: {
+      n1: {
+        text:'Halo min, saya mau tanya. Anak saya agak pendiam, kurang PD kalau ketemu orang baru. Kira kira cocok gak ya ikut kelas coding di sini? Saya takut dia malah tambah minder kalau gak bisa ikutin temen temennya.',
+        options: [
+          { text:'Halo Bu Wati, terima kasih sudah cerita ya. Banyak juga kok anak yang awalnya pendiam ikut kelas kami, karena belajarnya project based jadi fokusnya ke hasil karya sendiri dulu, bukan kompetisi ngomong di depan kelas. Mentornya juga terbiasa dampingi anak yang butuh waktu buat nyaman. Boleh tau anaknya kelas berapa Bu?', score:4, next:'n2a' },
+          { text:'Halo Bu, tenang aja, kelas kami suportif kok buat semua tipe anak, gak akan ada tekanan buat anak yang pendiam.', score:3, next:'n2b' },
+          { text:'Setiap anak beda beda Bu, coba aja dulu nanti keliatan cocok atau enggak.', score:2, next:'n2b' },
+          { text:'Oh kalau anaknya pendiam mending ikutan kelas lain aja yang lebih santai, coding kan butuh aktif diskusi.', score:1, next:'fail_hard' }
+        ]
+      },
+      n2a: {
+        text:'Oh gitu ya, lumayan lega dengernya. Anaknya kelas 3 SD. Terus kalau misalnya dia diem aja gak mau nyoba gimana min, apa dipaksa?',
+        options: [
+          { text:'Enggak akan dipaksa Bu, mentor kami biasanya kasih waktu anak observasi dulu sebelum diajak ikut aktif, jadi dia yang nentuin ritmenya sendiri. Kalau Ibu mau, boleh juga temenin sesi pertama sebagai Free Trial biar sama sama liat responnya.', score:4, next:'trial' },
+          { text:'Enggak dipaksa Bu, mentornya udah biasa handle macem macem karakter anak.', score:3, next:'n2c' },
+          { text:'Nanti kita liat aja Bu progressnya gimana.', score:2, next:'n2c' },
+          { text:'Ya kalau gak mau nyoba berarti emang belum siap Bu.', score:1, next:'fail_hard' }
+        ]
+      },
+      n2b: {
+        text:'Hmm oke deh. Tapi saya masih agak ragu sih, takut nanti nyesel udah bayar tapi anaknya gak nyaman.',
+        options: [
+          { text:'Wajar kok Bu khawatir gitu. Makanya biar gak perlu langsung komit, ada opsi coba Free Trial dulu gratis, jadi Ibu bisa liat langsung responnya anak sebelum mutusin lanjut atau enggak.', score:4, next:'trial' },
+          { text:'Kalau ragu emang wajar Bu, banyak juga yang awalnya ragu tapi akhirnya lanjut kok.', score:2, next:'fail_soft' },
+          { text:'Kalau ragu, mendingan dipikir pikir dulu aja Bu di rumah.', score:1, next:'fail_soft' }
+        ]
+      },
+      n2c: {
+        text:'Hmm oke, tapi saya masih agak ragu sih, takut nanti nyesel udah bayar tapi anaknya gak nyaman.',
+        options: [
+          { text:'Wajar kok Bu khawatir gitu. Makanya biar gak perlu langsung komit, ada opsi coba Free Trial dulu gratis, jadi Ibu bisa liat langsung responnya anak sebelum mutusin lanjut atau enggak.', score:4, next:'trial' },
+          { text:'Kalau ragu emang wajar Bu, banyak juga yang awalnya ragu tapi akhirnya lanjut kok.', score:2, next:'fail_soft' },
+          { text:'Kalau ragu, mendingan dipikir pikir dulu aja Bu di rumah.', score:1, next:'fail_soft' }
+        ]
+      }
+    }
+  }
+};
+
+const customerOrder = ['sarah','doni','rani','wati'];
+const patienceBase = { sarah:3, doni:2, rani:4, wati:3 };
+
+let ep2State = {};
+let ep2ActiveKey = null;
+
+function startEpisode2(){
+  gameState.episode2.customers = {};
+  gameState.episode2.slots.s1.used = 0;
+  gameState.episode2.slots.s2.used = 0;
+  gameState.episode2.slots.s3.used = 0;
+
+  ep2State = {};
+  customerOrder.forEach(key => {
+    const c = customers[key];
+    ep2State[key] = {
+      nodeId: c.start,
+      scores: [],
+      log: [{ who:'customer', text: c.nodes[c.start].text }],
+      patience: patienceBase[key],
+      base: patienceBase[key],
+      awaitingReply: true,
+      status: 'active', // active | ended
+      endType: null,
+      trialIntroShown: false
+    };
+  });
+  ep2ActiveKey = 'sarah';
+  renderEp2App();
+}
+
+function activeCustomersLeft(){
+  return customerOrder.filter(k => ep2State[k].status === 'active');
+}
+
+function urgencyClass(st){
+  if(st.status !== 'active') return 'calm';
+  const ratio = st.patience / st.base;
+  if(ratio >= 0.66) return 'calm';
+  if(ratio >= 0.34) return 'warn';
+  return 'critical';
+}
+
+function tickOthers(excludeKey){
+  customerOrder.forEach(key => {
+    if(key === excludeKey) return;
+    const st = ep2State[key];
+    if(st.status !== 'active' || !st.awaitingReply) return;
+    st.patience -= 1;
+    if(st.patience <= 0){
+      st.status = 'ended';
+      st.endType = 'left_impatient';
+      st.awaitingReply = false;
+      st.log.push({ who:'system', text:`${customers[key].name} udah nunggu kelamaan dan memutuskan pergi tanpa dibales.` });
+      gameState.episode2.customers[key] = { registered:false, reason:'ditinggal_lama' };
+    }
+  });
+}
+
+function renderEp2App(){
+  if(activeCustomersLeft().length === 0){
+    return renderEp2FinalSummary();
+  }
+  if(!ep2State[ep2ActiveKey] || ep2State[ep2ActiveKey].status !== 'active'){
+    ep2ActiveKey = activeCustomersLeft()[0];
+  }
+
+  const c = customers[ep2ActiveKey];
+  const st = ep2State[ep2ActiveKey];
+
+  const tabs = customerOrder.map(key => {
+    const s = ep2State[key];
+    const cc = customers[key];
+    const initial = cc.name.replace(/^(Ibu|Pak|Kak|Bu)\s/,'')[0];
+    const classes = ['wa-tab'];
+    if(key === ep2ActiveKey) classes.push('selected');
+    if(s.status !== 'active') classes.push('ended');
+    return `<div class="${classes.join(' ')}" onclick="ep2SwitchTab('${key}')">
+      <div class="avatar">${initial}</div>
+      <span class="name">${cc.name.split(' ').pop()}</span>
+      ${s.status === 'active' ? `<span class="urgency-dot ${urgencyClass(s)}"></span>` : ''}
+    </div>`;
+  }).join('');
+
+  let bodyHtml = st.log.map(l => {
+    if(l.who === 'system') return `<div class="bubble system">${l.text}</div>`;
+    return `<div class="bubble ${l.who}">${l.who==='customer' ? `<div class="customer-tag">${c.name}</div>` : ''}${l.text}</div>`;
+  }).join('');
+
+  let replyArea = '';
+  if(st.status !== 'active'){
+    replyArea = `<div class="feedback ${st.endType==='registered' ? 'good' : st.endType==='soft_fail' ? 'warn' : 'bad'}">Chat ini sudah selesai.</div>`;
+  } else if(st.nodeId === 'trial'){
+    replyArea = renderTrialArea(ep2ActiveKey);
+  } else if(st.nodeId === 'fail_soft' || st.nodeId === 'fail_hard'){
+    handleEp2Ending(ep2ActiveKey, st.nodeId === 'fail_soft' ? 'soft_fail' : 'hard_fail');
+    return renderEp2App();
+  } else {
+    const node = c.nodes[st.nodeId];
+    const shuffled = shuffle(node.options.map((o,i)=>({...o, idx:i})));
+    replyArea = shuffled.map(o => `<button class="choice" onclick="ep2Pick('${ep2ActiveKey}',${o.idx})">${o.text}</button>`).join('');
+  }
+
+  frame('EPISODE 2 — WA ADMIN', `
+    <div class="actor player" style="left:40px;"><div class="body"></div><span class="label">Kamu</span></div>
+    <div class="station active" style="left:340px;">💻<span class="label">Laptop</span></div>
+  `, `
+    <div class="wa-app" style="margin:-14px -16px -14px -16px;">
+      <div class="wa-tabs">${tabs}</div>
+      <div class="wa-header">
+        <span>${c.name}</span>
+        <span class="patience-label">${st.status==='active' ? (st.awaitingReply ? 'sedang menunggu balasan' : 'santai') : 'chat selesai'}</span>
+      </div>
+      <div class="wa-body" id="chatlog">${bodyHtml}</div>
+      <div class="wa-reply-area">${replyArea}</div>
+    </div>
+  `);
+  setTimeout(()=>{ const cl = document.getElementById('chatlog'); if(cl) cl.scrollTop = cl.scrollHeight; }, 0);
+}
+
+function ep2SwitchTab(key){
+  ep2ActiveKey = key;
+  renderEp2App();
+}
+
+function ep2Pick(key, idx){
+  const c = customers[key];
+  const st = ep2State[key];
+  const node = c.nodes[st.nodeId];
+  const chosen = node.options[idx];
+  st.scores.push(chosen.score);
+  st.log.push({ who:'admin', text: chosen.text });
+
+  const nextId = chosen.next;
+  if(nextId === 'trial'){
+    st.nodeId = 'trial';
+    st.awaitingReply = false;
+  } else if(nextId === 'fail_soft' || nextId === 'fail_hard'){
+    st.nodeId = nextId;
+    st.awaitingReply = false;
+  } else {
+    const nextNode = c.nodes[nextId];
+    st.log.push({ who:'customer', text: nextNode.text });
+    st.nodeId = nextId;
+    st.awaitingReply = true;
+    st.patience = st.base;
+  }
+
+  tickOthers(key);
+  renderEp2App();
+}
+
+function handleEp2Ending(key, outcome){
+  const c = customers[key];
+  const st = ep2State[key];
+  st.status = 'ended';
+  if(outcome === 'soft_fail'){
+    st.endType = 'soft_fail';
+    st.log.push({ who:'system', text:`${c.name} bilang mau pikir pikir dulu. Belum berhasil dikonversi.` });
+    gameState.episode2.customers[key] = { registered:false, reason:'mikir_dulu' };
+  } else {
+    st.endType = 'hard_fail';
+    st.log.push({ who:'system', text:`${c.name} kurang puas dan memutuskan gak lanjut.` });
+    gameState.episode2.customers[key] = { registered:false, reason:'pergi' };
+  }
+  tickOthers(key);
+}
+
+function renderTrialArea(key){
+  const c = customers[key];
+  const st = ep2State[key];
+  if(!st.trialIntroShown){
+    st.trialIntroShown = true;
+    st.log.push({ who:'customer', text:`Oh oke, boleh juga dicoba dulu. Ngomong-ngomong, ${c.availLine}. Kira kira ada slot kosong kapan ya?` });
+  }
+  const avg = st.scores.reduce((a,b)=>a+b,0) / st.scores.length;
+  st.commitment = avg >= 3.6 ? 'high' : 'low';
+
+  const slots = gameState.episode2.slots;
+  return `
+    <div style="font-size:11.5px; margin-bottom:8px; font-weight:bold;">Tawarkan slot trial:</div>
+    <div class="slotbox">
+      ${Object.entries(slots).map(([id,s]) => `
+        <button class="slot-btn" ${s.used>=s.cap ? 'disabled' : ''} onclick="ep2OfferSlot('${key}','${id}')">
+          ${s.label} <span class="cap">${s.cap - s.used}/${s.cap} slot sisa</span>
+        </button>
+      `).join('')}
+    </div>
+    ${st.slotFeedback ? `<div class="feedback ${st.slotFeedback.type}">${st.slotFeedback.text}</div>` : ''}
+  `;
+}
+
+function ep2OfferSlot(key, slotId){
+  const c = customers[key];
+  const st = ep2State[key];
+  const slots = gameState.episode2.slots;
+  const slot = slots[slotId];
+
+  if(slot.used >= slot.cap){
+    st.slotFeedback = { type:'bad', text:`${slot.label} sudah penuh, coba tawarkan sesi lain.` };
+    tickOthers(key);
+    checkScheduleDeadEnd(key);
+    return renderEp2App();
+  }
+  if(!c.availability.includes(slotId)){
+    st.slotFeedback = { type:'bad', text:`${c.name} gak bisa di jadwal itu. Coba cek lagi ketersediaannya.` };
+    tickOthers(key);
+    checkScheduleDeadEnd(key);
+    return renderEp2App();
+  }
+
+  slot.used += 1;
+  st.status = 'ended';
+  st.endType = 'registered';
+  st.log.push({ who:'system', text:`✅ Terdaftar untuk ${slot.label}.` });
+  gameState.episode2.customers[key] = { registered:true, commitment: st.commitment, slot: slotId };
+  tickOthers(key);
+  renderEp2App();
+}
+
+function checkScheduleDeadEnd(key){
+  const c = customers[key];
+  const st = ep2State[key];
+  const slots = gameState.episode2.slots;
+  const stillPossible = c.availability.some(sid => slots[sid].used < slots[sid].cap);
+  if(!stillPossible){
+    st.status = 'ended';
+    st.endType = 'schedule_fail';
+    st.log.push({ who:'system', text:`Semua slot yang cocok buat ${c.name} udah penuh. Gagal jadwal walau sebenarnya mau daftar.` });
+    gameState.episode2.customers[key] = { registered:false, reason:'gagal_jadwal' };
+  }
+}
+
+function renderEp2FinalSummary(){
+  const results = gameState.episode2.customers;
+  const total = Object.values(results).filter(v=>v.registered).length;
+
+  frame('EPISODE 2 SELESAI', `
+    <div class="actor npc" style="left:60px;"><div class="body"></div><span class="label">Manajer</span></div>
+    <div class="actor player" style="left:200px;"><div class="body"></div><span class="label">Kamu</span></div>
+  `, `
+    <div class="dialogue-speaker">Rekap Hari Ini</div>
+    <div class="dialogue-text"><strong>${total} dari 4</strong> customer berhasil didaftarkan sebagai Free Trial.</div>
+    <ul class="summary-list">
+      ${customerOrder.map(key => {
+        const c = customers[key];
+        const r = results[key];
+        if(r && r.registered){
+          return `<li>${c.name} — Terdaftar (${gameState.episode2.slots[r.slot].label}, commitment: ${r.commitment})</li>`;
+        }
+        const reasonText = {
+          mikir_dulu: 'Belum daftar, masih mikir mikir',
+          pergi: 'Gagal, customer gak puas dan pergi',
+          ditinggal_lama: 'Gagal, ditinggal kelamaan gak dibales',
+          gagal_jadwal: 'Sebenarnya mau daftar, tapi gagal karena slot yang cocok penuh'
+        };
+        return `<li>${c.name} — ${reasonText[r?.reason] || 'Gagal / gak jadi daftar'}</li>`;
+      }).join('')}
+    </ul>
+    <div class="dialogue-actions">
+      <button class="choice" onclick="showStart()">Kembali ke Menu</button>
+    </div>
+  `);
+}
+
+showStart();
+</script>
+</body>
+</html>

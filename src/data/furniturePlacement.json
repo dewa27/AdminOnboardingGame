@@ -1,0 +1,173 @@
+[
+  {
+    "tile": 17,
+    "id": "reception_desk_a",
+    "x": 98,
+    "y": 161,
+    "w": 141,
+    "h": 65,
+    "file": "tile_017.png"
+  },
+  {
+    "tile": 23,
+    "id": "reception_desk_b",
+    "x": 204,
+    "y": 167,
+    "w": 53,
+    "h": 59,
+    "file": "tile_023.png"
+  },
+  {
+    "tile": 29,
+    "id": "bookshelf_wall",
+    "x": 279,
+    "y": 57,
+    "w": 80,
+    "h": 109,
+    "file": "tile_029.png"
+  },
+  {
+    "tile": 20,
+    "id": "water_dispenser",
+    "x": 311,
+    "y": 141,
+    "w": 31,
+    "h": 65,
+    "file": "tile_020.png"
+  },
+  {
+    "tile": 51,
+    "id": "trash_bin",
+    "x": 290,
+    "y": 174,
+    "w": 18,
+    "h": 25,
+    "file": "tile_051.png"
+  },
+  {
+    "tile": 33,
+    "id": "sofa",
+    "x": 38,
+    "y": 336,
+    "w": 84,
+    "h": 44,
+    "file": "tile_033.png"
+  },
+  {
+    "tile": 27,
+    "id": "round_table_1",
+    "x": 190,
+    "y": 254,
+    "w": 54,
+    "h": 51,
+    "file": "tile_027.png"
+  },
+  {
+    "tile": 38,
+    "id": "round_table_2",
+    "x": 157,
+    "y": 297,
+    "w": 54,
+    "h": 52,
+    "file": "tile_038.png"
+  },
+  {
+    "tile": 39,
+    "id": "chair_green_1",
+    "x": 175,
+    "y": 291,
+    "w": 32,
+    "h": 49,
+    "file": "tile_039.png"
+  },
+  {
+    "tile": 30,
+    "id": "chair_white_1",
+    "x": 207,
+    "y": 260,
+    "w": 34,
+    "h": 50,
+    "file": "tile_030.png"
+  },
+  {
+    "tile": 36,
+    "id": "chair_white_2",
+    "x": 244,
+    "y": 273,
+    "w": 33,
+    "h": 53,
+    "file": "tile_036.png"
+  },
+  {
+    "tile": 37,
+    "id": "chair_white_3",
+    "x": 209,
+    "y": 300,
+    "w": 34,
+    "h": 53,
+    "file": "tile_037.png"
+  },
+  {
+    "tile": 68,
+    "id": "plant_entrance_left",
+    "x": 194,
+    "y": 410,
+    "w": 26,
+    "h": 32,
+    "file": "tile_068.png"
+  },
+  {
+    "tile": 68,
+    "id": "plant_entrance_right",
+    "x": 316,
+    "y": 410,
+    "w": 26,
+    "h": 32,
+    "file": "tile_068.png"
+  },
+  {
+    "tile": 43,
+    "id": "desk_topleft",
+    "x": 413,
+    "y": 138,
+    "w": 155,
+    "h": 107,
+    "file": "tile_043.png"
+  },
+  {
+    "tile": 44,
+    "id": "desk_botleft",
+    "x": 413,
+    "y": 276,
+    "w": 93,
+    "h": 80,
+    "file": "tile_044.png"
+  },
+  {
+    "tile": 9,
+    "id": "small_shelf_right",
+    "x": 349,
+    "y": 126,
+    "w": 35,
+    "h": 68,
+    "file": "tile_009.png"
+  },
+  {
+    "tile": 68,
+    "id": "plant_right_top",
+    "x": 559,
+    "y": 134,
+    "w": 26,
+    "h": 32,
+    "file": "tile_068.png"
+  },
+  {
+    "tile": 68,
+    "id": "plant_right_bottom",
+    "x": 575,
+    "y": 266,
+    "w": 26,
+    "h": 32,
+    "file": "tile_068.png"
+  }
+]
