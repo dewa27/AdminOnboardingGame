@@ -302,6 +302,35 @@ p.sub {
   text-align: center;
   margin-top: 18px;
 }
+.footer-note a {
+  color: var(--teal-dark);
+  text-decoration: none;
+}
+.footer-note a:hover { text-decoration: underline; }
+
+/* ---------- Name input ---------- */
+
+.name-input {
+  width: 100%;
+  font-family: inherit;
+  font-size: 14px;
+  padding: 12px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--ink);
+  background: var(--panel);
+  margin-bottom: 8px;
+  transition: border-color .15s ease;
+}
+.name-input:focus {
+  outline: none;
+  border-color: var(--teal);
+}
+.name-error {
+  font-size: 11.5px;
+  color: var(--red);
+  margin: 0 0 14px 0;
+}
 
 /* ---------- WhatsApp-style chat (Episode 2) ---------- */
 
@@ -507,3 +536,73 @@ p.sub {
 .feedback.warn { background: var(--yellow-tint); color: #92400e; }
 .feedback.bad  { background: var(--red-tint);    color: #b91c1c; }
 .feedback.good { background: var(--green-tint);  color: #15803d; }
+
+/* ---------- Inspection tasks (Episode 1) ---------- */
+
+.ov-frame.wide { max-width: 720px; }
+.inspect-grid {
+  display: grid;
+  grid-template-columns: 230px 1fr;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+@media (max-width: 640px) { .inspect-grid { grid-template-columns: 1fr; } }
+.sheet-card, .notes-card {
+  background: var(--panel-soft);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+.sheet-card h4, .notes-card h4 { margin: 0 0 8px; font-size: 12px; color: var(--teal-dark); }
+.sheet-card dl { margin: 0; }
+.sheet-card dt { font-weight: 600; color: var(--ink); margin-top: 6px; }
+.sheet-card dd { margin: 0; color: var(--ink-soft); line-height: 1.45; }
+.notes-card ul { margin: 0; padding-left: 16px; color: var(--ink-soft); line-height: 1.5; }
+.muted { color: var(--ink-soft); opacity: .75; font-size: 12.5px; margin: 0; }
+.budget { font-size: 12px; color: var(--ink-soft); margin-bottom: 8px; }
+.budget.out strong { color: #b91c1c; }
+.obj-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 10px; }
+.obj-btn {
+  display: flex; align-items: center; gap: 8px;
+  text-align: left;
+  background: var(--panel);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  font-size: 13px; font-weight: 500; color: var(--ink);
+  cursor: pointer;
+}
+.obj-btn:hover, .obj-btn.active { border-color: var(--teal); background: var(--teal-tint); }
+.obj-icon { font-size: 16px; }
+.obj-name { flex: 1; }
+.obj-detail {
+  background: var(--panel-soft);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  min-height: 64px;
+}
+.obj-detail .obs { margin: 0 0 10px; font-size: 13px; line-height: 1.5; color: var(--ink); }
+.decided { margin: 0; font-size: 12.5px; color: var(--ink-soft); }
+.decision-row, .chip-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 6px; }
+.decision-row .mini-btn, .chip-row .mini-btn { margin: 0; }
+.report-box { border-left: 3px solid var(--yellow); background: var(--yellow-tint); padding: 8px 10px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0; }
+.rb-label { font-size: 11px; font-weight: 600; margin: 4px 0; color: var(--ink); }
+.chip {
+  font-family: inherit; font-size: 11.5px; padding: 5px 10px;
+  border: 1.5px solid var(--border); border-radius: 999px;
+  background: var(--panel); color: var(--ink); cursor: pointer;
+}
+.chip.on { border-color: var(--teal); background: var(--teal-tint); font-weight: 600; }
+.flash { margin-top: 8px; font-size: 12px; color: #b91c1c; }
+.result-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; max-height: 340px; overflow-y: auto; }
+.result-item { border: 1px solid var(--border); border-left-width: 4px; border-radius: var(--radius-sm); padding: 8px 12px; background: var(--panel); }
+.result-item.good { border-left-color: #16a34a; }
+.result-item.partial { border-left-color: var(--yellow); }
+.result-item.bad { border-left-color: #dc2626; }
+.result-item.skipped { border-left-color: var(--border); }
+.ri-head { font-size: 13px; display: flex; gap: 6px; align-items: center; }
+.ri-pts { margin-left: auto; font-size: 11px; color: var(--ink-soft); }
+.ri-note { font-size: 12px; color: var(--ink-soft); margin-top: 4px; line-height: 1.5; }

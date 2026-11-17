@@ -5,15 +5,24 @@
 // runEp2Summary() from its script runner.
 import { overlay } from './overlay.js';
 import { gameState } from '../state/gameState.js';
+import { saveGame } from '../state/storage.js';
 import { customers, customerOrder } from '../data/customers.js';
 
 export function runEp1Summary(onContinue) {
-  const reportCount = gameState.episode1.report.length;
-  const totalItems = 7;
-  const okCount = totalItems - reportCount;
+  gameState.progress.episode1Complete = true;
+  saveGame(gameState);
 
-  const reportLines = gameState.episode1.report
-    .map(r => `<li>${escapeHtml(r.item)} (${escapeHtml(r.area)}) — ${escapeHtml(r.reason)}</li>`)
+  const tasks = Object.values(gameState.episode1.tasks);
+  const points = tasks.reduce((n, t) => n + t.points, 0);
+  const max = tasks.reduce((n, t) => n + t.max, 0);
+  const percent = max ? Math.round((points / max) * 100) : 0;
+  const reports = gameState.episode1.report;
+
+  const taskLines = tasks
+    .map(t => `<li><strong>${escapeHtml(t.title)}</strong>: ${t.percent}%</li>`)
+    .join('');
+  const reportLines = reports
+    .map(r => `<li>${escapeHtml(r.item)} (${escapeHtml(r.area)}): ${escapeHtml(r.reason)}, ${r.urgent ? 'mendesak' : 'bisa menunggu'}</li>`)
     .join('');
 
   overlay.show(`
@@ -24,16 +33,14 @@ export function runEp1Summary(onContinue) {
       </div>
       <div class="ov-dialogue">
         <div class="dialogue-speaker">Manajer Cabang</div>
-        <div class="dialogue-text">Kerja bagus buat hari pertama! Ini rekap kesiapan cabang:</div>
-        <ul class="summary-list">
-          <li><strong>${okCount}</strong> item lengkap</li>
-          <li><strong>${reportCount}</strong> item dilaporkan${reportCount > 0 ? ':' : ''}</li>
-          ${reportLines}
-        </ul>
+        <div class="dialogue-text">Ini rekap kesiapan cabang. Skor keseluruhan kamu: <strong>${percent}%</strong>.</div>
+        <ul class="summary-list">${taskLines}</ul>
+        <div class="dialogue-text"><strong>${reports.length}</strong> laporan dikirim ke Ops${reports.length ? ':' : '.'}</div>
+        <ul class="summary-list">${reportLines}</ul>
         <div class="dialogue-text">${
-          reportCount > 0
-            ? 'Laporan ini otomatis dicatat buat ditindaklanjuti tim Ops. Bagus, jangan pernah diamkan kondisi yang gak sesuai.'
-            : 'Semua kondisi lengkap, mantap!'
+          percent >= 85
+            ? 'Mantap. Kamu tahu kapan harus beresin sendiri dan kapan harus lapor.'
+            : 'Yang penting: jangan diamkan kondisi yang gak sesuai, dan bedakan mana yang bisa kamu beresin sendiri dan mana yang harus naik ke Ops.'
         }</div>
         <div class="dialogue-actions">
           <button class="primary" data-next>Lanjut ke Episode 2</button>
@@ -53,6 +60,9 @@ export function runEp1Summary(onContinue) {
 }
 
 export function runEp2Summary(onContinue) {
+  gameState.progress.episode2Complete = true;
+  saveGame(gameState);
+
   const results = gameState.episode2.customers;
   const total = Object.values(results).filter(v => v.registered).length;
 

@@ -12,21 +12,11 @@
 export const stations = [
   {
     id: 'meja',
-    label: 'Meja Stationeries',
+    label: 'Paket HQ',
     icon: '🖊️',
     // Reception desk (left room).
     x: 177,
     y: 186,
-    width: 10,
-    height: 10
-  },
-  {
-    id: 'rak',
-    label: 'Rak Pajangan',
-    icon: '👕',
-    // Wall-mounted shelf unit right of the reception desk (left room).
-    x: 302,
-    y: 115,
     width: 10,
     height: 10
   },

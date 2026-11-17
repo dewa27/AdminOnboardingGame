@@ -21,6 +21,7 @@
 //     'gagal_jadwal'.
 import { overlay } from './overlay.js';
 import { gameState } from '../state/gameState.js';
+import { saveGame } from '../state/storage.js';
 import { customers, customerOrder, patienceBase } from '../data/customers.js';
 
 let ep2State = {};
@@ -97,6 +98,7 @@ function tickOthers(excludeKey) {
         text: `${customers[key].name} udah nunggu kelamaan dan memutuskan pergi tanpa dibales.`
       });
       gameState.episode2.customers[key] = { registered: false, reason: 'ditinggal_lama' };
+      saveGame(gameState);
     }
   });
 }
@@ -114,6 +116,7 @@ function handleEnding(key, outcome) {
     st.log.push({ who: 'system', text: `${c.name} kurang puas dan memutuskan gak lanjut.` });
     gameState.episode2.customers[key] = { registered: false, reason: 'pergi' };
   }
+  saveGame(gameState);
   tickOthers(key);
 }
 
@@ -130,6 +133,7 @@ function checkScheduleDeadEnd(key) {
       text: `Semua slot yang cocok buat ${c.name} udah penuh. Gagal jadwal walau sebenarnya mau daftar.`
     });
     gameState.episode2.customers[key] = { registered: false, reason: 'gagal_jadwal' };
+    saveGame(gameState);
   }
 }
 
@@ -349,6 +353,7 @@ function ep2OfferSlot(key, slotId, onDone) {
   st.endType = 'registered';
   st.log.push({ who: 'system', text: `✅ Terdaftar untuk ${slot.label}.` });
   gameState.episode2.customers[key] = { registered: true, commitment: st.commitment, slot: slotId };
+  saveGame(gameState);
   tickOthers(key);
   render(onDone);
 }

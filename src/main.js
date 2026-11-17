@@ -7,14 +7,24 @@ import Phaser from 'phaser';
 import { config } from './config.js';
 import { overlay } from './ui/overlay.js';
 import { showStart } from './ui/startScreen.js';
+import { showNameInput } from './ui/nameScreen.js';
+import { gameState, applySavedState } from './state/gameState.js';
+import { loadGame } from './state/storage.js';
 import './ui/styles.css';
 
 // Initialise the overlay container so any view can mount itself into it.
 overlay.init(document.getElementById('overlay'));
 
-// Show the start screen immediately so the player has something to click
-// while Phaser boots in the background.
-showStart();
+// Restore any previous save (see state/storage.js) before the first screen
+// renders. A returning player (playerName already saved) skips straight to
+// the start menu; a first-time player is asked for their name first.
+applySavedState(loadGame());
+
+if (gameState.playerName) {
+  showStart();
+} else {
+  showNameInput(() => showStart());
+}
 
 // Boot the Phaser game.
 const game = new Phaser.Game(config);

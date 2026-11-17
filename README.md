@@ -24,7 +24,9 @@ customer chats simultaneously.
 src/
 ├── main.js               entry: boots Phaser + overlay
 ├── config.js             Phaser game config
-├── state/gameState.js    shared state singleton
+├── state/
+│   ├── gameState.js      shared state singleton
+│   └── storage.js        localStorage save/load ("database")
 ├── data/
 │   ├── customers.js      Episode 2 dialogue trees
 │   ├── ep1Script.js      Episode 1 step script
@@ -37,6 +39,7 @@ src/
 │   └── player.js         keyboard movement (WASD + arrows)
 └── ui/
     ├── overlay.js        show/hide controller
+    ├── nameScreen.js     first screen: ask for player name
     ├── startScreen.js
     ├── dialogue.js
     ├── checklist.js
@@ -75,8 +78,10 @@ S3, GitHub Pages, or just `file://`).
 - **Real sprite art** — every actor is a colored box (see BootScene).
 - **Episode 3** — the trial-day episode that reads `commitment` from
   Episode 2. Deferred until Episodes 1–2 are considered final.
-- **Persistence** — `window.gameState` lives only as long as the tab does.
-  Reloading restarts the game. Tracked in handover doc §8.
+- **Cross-device persistence** — progress is saved to the browser's
+  `localStorage` (see `state/storage.js`), so it survives a reload but not
+  a switch to a different browser/device. A real backend is a future step
+  if that's ever needed.
 - **Overall scoring** — recap is per-episode, no combined score yet.
 
 ## Reusability notes

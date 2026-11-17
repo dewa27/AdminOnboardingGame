@@ -1,0 +1,1196 @@
+{
+  "schema_version": 1,
+  "art_direction_brief": "docs/art-direction-brief.md",
+  "assets": [
+    {
+      "id": "cu_case",
+      "role": "Pen case: 2 rows x 10 slots (slot centres in closeup.layout.json)",
+      "path": "src/assets/generated/closeup/cu_case.png",
+      "status": "approved-for-prototype",
+      "technical": {
+        "dimensions": "130x74",
+        "alpha": true,
+        "anchor": "center",
+        "frames": 1,
+        "filtering": "nearest",
+        "display_scale": 2
+      },
+      "visual_locks": [
+        "16-colour palette (tools/generate-assets.mjs P)",
+        "top-left light",
+        "dark-violet outline #2b2438",
+        "top-down view"
+      ],
+      "source": {
+        "kind": "authored-procedural",
+        "url_or_tool": "tools/generate-assets.mjs",
+        "creator": "Claude Code (session with project owner)",
+        "created_at": "2026-10-24",
+        "license": "project-owned, generated from code",
+        "attribution": "",
+        "prompt_or_source_record": "drawn with code primitives; no image-generation tool used"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "cu_drawer_closed",
+      "role": "Stock drawer, closed front",
+      "path": "src/assets/generated/closeup/cu_drawer_closed.png",
+      "status": "approved-for-prototype",
+      "technical": {
+        "dimensions": "138x100",
+        "alpha": true,
+        "anchor": "center",
+        "frames": 1,
+        "filtering": "nearest",
+        "display_scale": 2
+      },
+      "visual_locks": [
+        "16-colour palette (tools/generate-assets.mjs P)",
+        "top-left light",
+        "dark-violet outline #2b2438",
+        "top-down view"
+      ],
+      "source": {
+        "kind": "authored-procedural",
+        "url_or_tool": "tools/generate-assets.mjs",
+        "creator": "Claude Code (session with project owner)",
+        "created_at": "2026-10-24",
+        "license": "project-owned, generated from code",
+        "attribution": "",
+        "prompt_or_source_record": "drawn with code primitives; no image-generation tool used"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "cu_drawer_open",
+      "role": "Stock drawer, open interior",
+      "path": "src/assets/generated/closeup/cu_drawer_open.png",
+      "status": "approved-for-prototype",
+      "technical": {
+        "dimensions": "138x100",
+        "alpha": true,
+        "anchor": "center",
+        "frames": 1,
+        "filtering": "nearest",
+        "display_scale": 2
+      },
+      "visual_locks": [
+        "16-colour palette (tools/generate-assets.mjs P)",
+        "top-left light",
+        "dark-violet outline #2b2438",
+        "top-down view"
+      ],
+      "source": {
+        "kind": "authored-procedural",
+        "url_or_tool": "tools/generate-assets.mjs",
+        "creator": "Claude Code (session with project owner)",
+        "created_at": "2026-10-24",
+        "license": "project-owned, generated from code",
+        "attribution": "",
+        "prompt_or_source_record": "drawn with code primitives; no image-generation tool used"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "cu_pack_big",
+      "role": "Paper pack, 10 sheets",
+      "path": "src/assets/generated/closeup/cu_pack_big.png",
+      "status": "approved-for-prototype",
+      "technical": {
+        "dimensions": "24x18",
+        "alpha": true,
+        "anchor": "center",
+        "frames": 1,
+        "filtering": "nearest",
+        "display_scale": 2
+      },
+      "visual_locks": [
+        "16-colour palette (tools/generate-assets.mjs P)",
+        "top-left light",
+        "dark-violet outline #2b2438",
+        "top-down view"
+      ],
+      "source": {
+        "kind": "authored-procedural",
+        "url_or_tool": "tools/generate-assets.mjs",
+        "creator": "Claude Code (session with project owner)",
+        "created_at": "2026-10-24",
+        "license": "project-owned, generated from code",
+        "attribution": "",
+        "prompt_or_source_record": "drawn with code primitives; no image-generation tool used"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "cu_pack_small",
+      "role": "Loose paper remainder (fewer than 10 sheets)",
+      "path": "src/assets/generated/closeup/cu_pack_small.png",
+      "status": "approved-for-prototype",
+      "technical": {
+        "dimensions": "24x12",
+        "alpha": true,
+        "anchor": "center",
+        "frames": 1,
+        "filtering": "nearest",
+        "display_scale": 2
+      },
+      "visual_locks": [
+        "16-colour palette (tools/generate-assets.mjs P)",
+        "top-left light",
+        "dark-violet outline #2b2438",
+        "top-down view"
+      ],
+      "source": {
+        "kind": "authored-procedural",
+        "url_or_tool": "tools/generate-assets.mjs",
+        "creator": "Claude Code (session with project owner)",
+        "created_at": "2026-10-24",
+        "license": "project-owned, generated from code",
+        "attribution": "",
+        "prompt_or_source_record": "drawn with code primitives; no image-generation tool used"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "cu_pen_h0",
+      "role": "Pen lying flat (4 colours). Working and dry pens use the SAME sprite.",
+      "path": "src/assets/generated/closeup/cu_pen_h0.png",
+      "status": "approved-for-prototype",
+      "technical": {
+        "dimensions": "26x8",
+        "alpha": true,
+        "anchor": "center",
+        "frames": 1,
+        "filtering": "nearest",
+        "display_scale": 2
+      },
+      "visual_locks": [
+        "16-colour palette (tools/generate-assets.mjs P)",
+        "top-left light",
+        "dark-violet outline #2b2438",
+        "top-down view"
+      ],
+      "source": {
+        "kind": "authored-procedural",
+        "url_or_tool": "tools/generate-assets.mjs",
+        "creator": "Claude Code (session with project owner)",
+        "created_at": "2026-10-24",
+        "license": "project-owned, generated from code",
+        "attribution": "",
+        "prompt_or_source_record": "drawn with code primitives; no image-generation tool used"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "cu_pen_h1",
+      "role": "Pen lying flat (4 colours). Working and dry pens use the SAME sprite.",
+      "path": "src/assets/generated/closeup/cu_pen_h1.png",
+      "status": "approved-for-prototype",
+      "technical": {
+        "dimensions": "26x8",
+        "alpha": true,
+        "anchor": "center",
+        "frames": 1,
+        "filtering": "nearest",
+        "display_scale": 2
+      },
+      "visual_locks": [
+        "16-colour palette (tools/generate-assets.mjs P)",
+        "top-left light",
+        "dark-violet outline #2b2438",
+        "top-down view"
+      ],
+      "source": {
+        "kind": "authored-procedural",
+        "url_or_tool": "tools/generate-assets.mjs",
+        "creator": "Claude Code (session with project owner)",
+        "created_at": "2026-10-24",
+        "license": "project-owned, generated from code",
+        "attribution": "",
+        "prompt_or_source_record": "drawn with code primitives; no image-generation tool used"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "cu_pen_h2",
+      "role": "Pen lying flat (4 colours). Working and dry pens use the SAME sprite.",
+      "path": "src/assets/generated/closeup/cu_pen_h2.png",
+      "status": "approved-for-prototype",
+      "technical": {
+        "dimensions": "26x8",
+        "alpha": true,
+        "anchor": "center",
+        "frames": 1,
+        "filtering": "nearest",
+        "display_scale": 2
+      },
+      "visual_locks": [
+        "16-colour palette (tools/generate-assets.mjs P)",
+        "top-left light",
+        "dark-violet outline #2b2438",
+        "top-down view"
+      ],
+      "source": {
+        "kind": "authored-procedural",
+        "url_or_tool": "tools/generate-assets.mjs",
+        "creator": "Claude Code (session with project owner)",
+        "created_at": "2026-10-24",
+        "license": "project-owned, generated from code",
+        "attribution": "",
+        "prompt_or_source_record": "drawn with code primitives; no image-generation tool used"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "cu_pen_h3",
+      "role": "Pen lying flat (4 colours). Working and dry pens use the SAME sprite.",
+      "path": "src/assets/generated/closeup/cu_pen_h3.png",
+      "status": "approved-for-prototype",
+      "technical": {
+        "dimensions": "26x8",
+        "alpha": true,
+        "anchor": "center",
+        "frames": 1,
+        "filtering": "nearest",
+        "display_scale": 2
+      },
+      "visual_locks": [
+        "16-colour palette (tools/generate-assets.mjs P)",
+        "top-left light",
+        "dark-violet outline #2b2438",
+        "top-down view"
+      ],
+      "source": {
+        "kind": "authored-procedural",
+        "url_or_tool": "tools/generate-assets.mjs",
+        "creator": "Claude Code (session with project owner)",
+        "created_at": "2026-10-24",
+        "license": "project-owned, generated from code",
+        "attribution": "",
+        "prompt_or_source_record": "drawn with code primitives; no image-generation tool used"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "cu_pen_v0",
+      "role": "Pen standing in the case (4 colours)",
+      "path": "src/assets/generated/closeup/cu_pen_v0.png",
+      "status": "approved-for-prototype",
+      "technical": {
+        "dimensions": "8x26",
+        "alpha": true,
+        "anchor": "center",
+        "frames": 1,
+        "filtering": "nearest",
+        "display_scale": 2
+      },
+      "visual_locks": [
+        "16-colour palette (tools/generate-assets.mjs P)",
+        "top-left light",
+        "dark-violet outline #2b2438",
+        "top-down view"
+      ],
+      "source": {
+        "kind": "authored-procedural",
+        "url_or_tool": "tools/generate-assets.mjs",
+        "creator": "Claude Code (session with project owner)",
+        "created_at": "2026-10-24",
+        "license": "project-owned, generated from code",
+        "attribution": "",
+        "prompt_or_source_record": "drawn with code primitives; no image-generation tool used"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "cu_pen_v1",
+      "role": "Pen standing in the case (4 colours)",
+      "path": "src/assets/generated/closeup/cu_pen_v1.png",
+      "status": "approved-for-prototype",
+      "technical": {
+        "dimensions": "8x26",
+        "alpha": true,
+        "anchor": "center",
+        "frames": 1,
+        "filtering": "nearest",
+        "display_scale": 2
+      },
+      "visual_locks": [
+        "16-colour palette (tools/generate-assets.mjs P)",
+        "top-left light",
+        "dark-violet outline #2b2438",
+        "top-down view"
+      ],
+      "source": {
+        "kind": "authored-procedural",
+        "url_or_tool": "tools/generate-assets.mjs",
+        "creator": "Claude Code (session with project owner)",
+        "created_at": "2026-10-24",
+        "license": "project-owned, generated from code",
+        "attribution": "",
+        "prompt_or_source_record": "drawn with code primitives; no image-generation tool used"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "cu_pen_v2",
+      "role": "Pen standing in the case (4 colours)",
+      "path": "src/assets/generated/closeup/cu_pen_v2.png",
+      "status": "approved-for-prototype",
+      "technical": {
+        "dimensions": "8x26",
+        "alpha": true,
+        "anchor": "center",
+        "frames": 1,
+        "filtering": "nearest",
+        "display_scale": 2
+      },
+      "visual_locks": [
+        "16-colour palette (tools/generate-assets.mjs P)",
+        "top-left light",
+        "dark-violet outline #2b2438",
+        "top-down view"
+      ],
+      "source": {
+        "kind": "authored-procedural",
+        "url_or_tool": "tools/generate-assets.mjs",
+        "creator": "Claude Code (session with project owner)",
+        "created_at": "2026-10-24",
+        "license": "project-owned, generated from code",
+        "attribution": "",
+        "prompt_or_source_record": "drawn with code primitives; no image-generation tool used"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "cu_pen_v3",
+      "role": "Pen standing in the case (4 colours)",
+      "path": "src/assets/generated/closeup/cu_pen_v3.png",
+      "status": "approved-for-prototype",
+      "technical": {
+        "dimensions": "8x26",
+        "alpha": true,
+        "anchor": "center",
+        "frames": 1,
+        "filtering": "nearest",
+        "display_scale": 2
+      },
+      "visual_locks": [
+        "16-colour palette (tools/generate-assets.mjs P)",
+        "top-left light",
+        "dark-violet outline #2b2438",
+        "top-down view"
+      ],
+      "source": {
+        "kind": "authored-procedural",
+        "url_or_tool": "tools/generate-assets.mjs",
+        "creator": "Claude Code (session with project owner)",
+        "created_at": "2026-10-24",
+        "license": "project-owned, generated from code",
+        "attribution": "",
+        "prompt_or_source_record": "drawn with code primitives; no image-generation tool used"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "cu_pk_bag_black",
+      "role": "HQ package: black tote bag (after bag2.png)",
+      "path": "src/assets/generated/closeup/cu_pk_bag_black.png",
+      "status": "approved-for-prototype",
+      "technical": {
+        "dimensions": "26x30",
+        "alpha": true,
+        "anchor": "center",
+        "frames": 1,
+        "filtering": "nearest",
+        "display_scale": 2
+      },
+      "visual_locks": [
+        "16-colour palette (tools/generate-assets.mjs P)",
+        "top-left light",
+        "dark-violet outline #2b2438",
+        "top-down view"
+      ],
+      "source": {
+        "kind": "authored-procedural",
+        "url_or_tool": "tools/generate-assets.mjs",
+        "creator": "Claude Code (session with project owner)",
+        "created_at": "2026-10-24",
+        "license": "project-owned, generated from code",
+        "attribution": "",
+        "prompt_or_source_record": "drawn with code primitives; no image-generation tool used; design follows src/assets/bag1.png / bag2.png reference art"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "cu_pk_bag_green",
+      "role": "HQ package: green drawstring bag with bear/robot/drone scene (after bag1.png)",
+      "path": "src/assets/generated/closeup/cu_pk_bag_green.png",
+      "status": "approved-for-prototype",
+      "technical": {
+        "dimensions": "26x30",
+        "alpha": true,
+        "anchor": "center",
+        "frames": 1,
+        "filtering": "nearest",
+        "display_scale": 2
+      },
+      "visual_locks": [
+        "16-colour palette (tools/generate-assets.mjs P)",
+        "top-left light",
+        "dark-violet outline #2b2438",
+        "top-down view"
+      ],
+      "source": {
+        "kind": "authored-procedural",
+        "url_or_tool": "tools/generate-assets.mjs",
+        "creator": "Claude Code (session with project owner)",
+        "created_at": "2026-10-24",
+        "license": "project-owned, generated from code",
+        "attribution": "",
+        "prompt_or_source_record": "drawn with code primitives; no image-generation tool used; design follows src/assets/bag1.png / bag2.png reference art"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "cu_pk_bin",
+      "role": "Sorting bin; counter and label drawn by the scene",
+      "path": "src/assets/generated/closeup/cu_pk_bin.png",
+      "status": "approved-for-prototype",
+      "technical": {
+        "dimensions": "34x46",
+        "alpha": true,
+        "anchor": "center",
+        "frames": 1,
+        "filtering": "nearest",
+        "display_scale": 2
+      },
+      "visual_locks": [
+        "16-colour palette (tools/generate-assets.mjs P)",
+        "top-left light",
+        "dark-violet outline #2b2438",
+        "top-down view"
+      ],
+      "source": {
+        "kind": "authored-procedural",
+        "url_or_tool": "tools/generate-assets.mjs",
+        "creator": "Claude Code (session with project owner)",
+        "created_at": "2026-10-24",
+        "license": "project-owned, generated from code",
+        "attribution": "",
+        "prompt_or_source_record": "drawn with code primitives; no image-generation tool used"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "cu_pk_box_closed",
+      "role": "HQ delivery box, taped shut",
+      "path": "src/assets/generated/closeup/cu_pk_box_closed.png",
+      "status": "approved-for-prototype",
+      "technical": {
+        "dimensions": "74x58",
+        "alpha": true,
+        "anchor": "center",
+        "frames": 1,
+        "filtering": "nearest",
+        "display_scale": 2
+      },
+      "visual_locks": [
+        "16-colour palette (tools/generate-assets.mjs P)",
+        "top-left light",
+        "dark-violet outline #2b2438",
+        "top-down view"
+      ],
+      "source": {
+        "kind": "authored-procedural",
+        "url_or_tool": "tools/generate-assets.mjs",
+        "creator": "Claude Code (session with project owner)",
+        "created_at": "2026-10-24",
+        "license": "project-owned, generated from code",
+        "attribution": "",
+        "prompt_or_source_record": "drawn with code primitives; no image-generation tool used"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "cu_pk_box_open",
+      "role": "HQ delivery box, open",
+      "path": "src/assets/generated/closeup/cu_pk_box_open.png",
+      "status": "approved-for-prototype",
+      "technical": {
+        "dimensions": "74x58",
+        "alpha": true,
+        "anchor": "center",
+        "frames": 1,
+        "filtering": "nearest",
+        "display_scale": 2
+      },
+      "visual_locks": [
+        "16-colour palette (tools/generate-assets.mjs P)",
+        "top-left light",
+        "dark-violet outline #2b2438",
+        "top-down view"
+      ],
+      "source": {
+        "kind": "authored-procedural",
+        "url_or_tool": "tools/generate-assets.mjs",
+        "creator": "Claude Code (session with project owner)",
+        "created_at": "2026-10-24",
+        "license": "project-owned, generated from code",
+        "attribution": "",
+        "prompt_or_source_record": "drawn with code primitives; no image-generation tool used"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "cu_pk_laptop",
+      "role": "HQ package: laptop, intact",
+      "path": "src/assets/generated/closeup/cu_pk_laptop.png",
+      "status": "approved-for-prototype",
+      "technical": {
+        "dimensions": "30x22",
+        "alpha": true,
+        "anchor": "center",
+        "frames": 1,
+        "filtering": "nearest",
+        "display_scale": 2
+      },
+      "visual_locks": [
+        "16-colour palette (tools/generate-assets.mjs P)",
+        "top-left light",
+        "dark-violet outline #2b2438",
+        "top-down view"
+      ],
+      "source": {
+        "kind": "authored-procedural",
+        "url_or_tool": "tools/generate-assets.mjs",
+        "creator": "Claude Code (session with project owner)",
+        "created_at": "2026-10-24",
+        "license": "project-owned, generated from code",
+        "attribution": "",
+        "prompt_or_source_record": "drawn with code primitives; no image-generation tool used"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "cu_pk_laptop_broken",
+      "role": "HQ package: laptop, cracked screen",
+      "path": "src/assets/generated/closeup/cu_pk_laptop_broken.png",
+      "status": "approved-for-prototype",
+      "technical": {
+        "dimensions": "30x22",
+        "alpha": true,
+        "anchor": "center",
+        "frames": 1,
+        "filtering": "nearest",
+        "display_scale": 2
+      },
+      "visual_locks": [
+        "16-colour palette (tools/generate-assets.mjs P)",
+        "top-left light",
+        "dark-violet outline #2b2438",
+        "top-down view"
+      ],
+      "source": {
+        "kind": "authored-procedural",
+        "url_or_tool": "tools/generate-assets.mjs",
+        "creator": "Claude Code (session with project owner)",
+        "created_at": "2026-10-24",
+        "license": "project-owned, generated from code",
+        "attribution": "",
+        "prompt_or_source_record": "drawn with code primitives; no image-generation tool used"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "cu_pk_list",
+      "role": "Packing list (surat jalan) paper; text drawn by the scene",
+      "path": "src/assets/generated/closeup/cu_pk_list.png",
+      "status": "approved-for-prototype",
+      "technical": {
+        "dimensions": "100x110",
+        "alpha": true,
+        "anchor": "center",
+        "frames": 1,
+        "filtering": "nearest",
+        "display_scale": 2
+      },
+      "visual_locks": [
+        "16-colour palette (tools/generate-assets.mjs P)",
+        "top-left light",
+        "dark-violet outline #2b2438",
+        "top-down view"
+      ],
+      "source": {
+        "kind": "authored-procedural",
+        "url_or_tool": "tools/generate-assets.mjs",
+        "creator": "Claude Code (session with project owner)",
+        "created_at": "2026-10-24",
+        "license": "project-owned, generated from code",
+        "attribution": "",
+        "prompt_or_source_record": "drawn with code primitives; no image-generation tool used"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "cu_pk_robot",
+      "role": "HQ package: robot, intact",
+      "path": "src/assets/generated/closeup/cu_pk_robot.png",
+      "status": "approved-for-prototype",
+      "technical": {
+        "dimensions": "24x26",
+        "alpha": true,
+        "anchor": "center",
+        "frames": 1,
+        "filtering": "nearest",
+        "display_scale": 2
+      },
+      "visual_locks": [
+        "16-colour palette (tools/generate-assets.mjs P)",
+        "top-left light",
+        "dark-violet outline #2b2438",
+        "top-down view"
+      ],
+      "source": {
+        "kind": "authored-procedural",
+        "url_or_tool": "tools/generate-assets.mjs",
+        "creator": "Claude Code (session with project owner)",
+        "created_at": "2026-10-24",
+        "license": "project-owned, generated from code",
+        "attribution": "",
+        "prompt_or_source_record": "drawn with code primitives; no image-generation tool used"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "cu_pk_robot_broken",
+      "role": "HQ package: robot, damaged (bent antenna, cracked head)",
+      "path": "src/assets/generated/closeup/cu_pk_robot_broken.png",
+      "status": "approved-for-prototype",
+      "technical": {
+        "dimensions": "24x26",
+        "alpha": true,
+        "anchor": "center",
+        "frames": 1,
+        "filtering": "nearest",
+        "display_scale": 2
+      },
+      "visual_locks": [
+        "16-colour palette (tools/generate-assets.mjs P)",
+        "top-left light",
+        "dark-violet outline #2b2438",
+        "top-down view"
+      ],
+      "source": {
+        "kind": "authored-procedural",
+        "url_or_tool": "tools/generate-assets.mjs",
+        "creator": "Claude Code (session with project owner)",
+        "created_at": "2026-10-24",
+        "license": "project-owned, generated from code",
+        "attribution": "",
+        "prompt_or_source_record": "drawn with code primitives; no image-generation tool used"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "cu_pk_shirt_black_1",
+      "role": "HQ package: black T-shirt, level 1 chest design (bear)",
+      "path": "src/assets/generated/closeup/cu_pk_shirt_black_1.png",
+      "status": "approved-for-prototype",
+      "technical": {
+        "dimensions": "24x24",
+        "alpha": true,
+        "anchor": "center",
+        "frames": 1,
+        "filtering": "nearest",
+        "display_scale": 2
+      },
+      "visual_locks": [
+        "16-colour palette (tools/generate-assets.mjs P)",
+        "top-left light",
+        "dark-violet outline #2b2438",
+        "top-down view"
+      ],
+      "source": {
+        "kind": "authored-procedural",
+        "url_or_tool": "tools/generate-assets.mjs",
+        "creator": "Claude Code (session with project owner)",
+        "created_at": "2026-10-24",
+        "license": "project-owned, generated from code",
+        "attribution": "",
+        "prompt_or_source_record": "drawn with code primitives; no image-generation tool used; design follows src/assets/bag1.png / bag2.png reference art"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "cu_pk_shirt_black_2",
+      "role": "HQ package: black T-shirt, level 2 chest design (robot)",
+      "path": "src/assets/generated/closeup/cu_pk_shirt_black_2.png",
+      "status": "approved-for-prototype",
+      "technical": {
+        "dimensions": "24x24",
+        "alpha": true,
+        "anchor": "center",
+        "frames": 1,
+        "filtering": "nearest",
+        "display_scale": 2
+      },
+      "visual_locks": [
+        "16-colour palette (tools/generate-assets.mjs P)",
+        "top-left light",
+        "dark-violet outline #2b2438",
+        "top-down view"
+      ],
+      "source": {
+        "kind": "authored-procedural",
+        "url_or_tool": "tools/generate-assets.mjs",
+        "creator": "Claude Code (session with project owner)",
+        "created_at": "2026-10-24",
+        "license": "project-owned, generated from code",
+        "attribution": "",
+        "prompt_or_source_record": "drawn with code primitives; no image-generation tool used; design follows src/assets/bag1.png / bag2.png reference art"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "cu_pk_shirt_black_3",
+      "role": "HQ package: black T-shirt, level 3 chest design (shape cluster)",
+      "path": "src/assets/generated/closeup/cu_pk_shirt_black_3.png",
+      "status": "approved-for-prototype",
+      "technical": {
+        "dimensions": "24x24",
+        "alpha": true,
+        "anchor": "center",
+        "frames": 1,
+        "filtering": "nearest",
+        "display_scale": 2
+      },
+      "visual_locks": [
+        "16-colour palette (tools/generate-assets.mjs P)",
+        "top-left light",
+        "dark-violet outline #2b2438",
+        "top-down view"
+      ],
+      "source": {
+        "kind": "authored-procedural",
+        "url_or_tool": "tools/generate-assets.mjs",
+        "creator": "Claude Code (session with project owner)",
+        "created_at": "2026-10-24",
+        "license": "project-owned, generated from code",
+        "attribution": "",
+        "prompt_or_source_record": "drawn with code primitives; no image-generation tool used; design follows src/assets/bag1.png / bag2.png reference art"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "cu_pk_shirt_white_1",
+      "role": "HQ package: white T-shirt, level 1 chest design (bear)",
+      "path": "src/assets/generated/closeup/cu_pk_shirt_white_1.png",
+      "status": "approved-for-prototype",
+      "technical": {
+        "dimensions": "24x24",
+        "alpha": true,
+        "anchor": "center",
+        "frames": 1,
+        "filtering": "nearest",
+        "display_scale": 2
+      },
+      "visual_locks": [
+        "16-colour palette (tools/generate-assets.mjs P)",
+        "top-left light",
+        "dark-violet outline #2b2438",
+        "top-down view"
+      ],
+      "source": {
+        "kind": "authored-procedural",
+        "url_or_tool": "tools/generate-assets.mjs",
+        "creator": "Claude Code (session with project owner)",
+        "created_at": "2026-10-24",
+        "license": "project-owned, generated from code",
+        "attribution": "",
+        "prompt_or_source_record": "drawn with code primitives; no image-generation tool used; design follows src/assets/bag1.png / bag2.png reference art"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "cu_pk_shirt_white_2",
+      "role": "HQ package: white T-shirt, level 2 chest design (robot)",
+      "path": "src/assets/generated/closeup/cu_pk_shirt_white_2.png",
+      "status": "approved-for-prototype",
+      "technical": {
+        "dimensions": "24x24",
+        "alpha": true,
+        "anchor": "center",
+        "frames": 1,
+        "filtering": "nearest",
+        "display_scale": 2
+      },
+      "visual_locks": [
+        "16-colour palette (tools/generate-assets.mjs P)",
+        "top-left light",
+        "dark-violet outline #2b2438",
+        "top-down view"
+      ],
+      "source": {
+        "kind": "authored-procedural",
+        "url_or_tool": "tools/generate-assets.mjs",
+        "creator": "Claude Code (session with project owner)",
+        "created_at": "2026-10-24",
+        "license": "project-owned, generated from code",
+        "attribution": "",
+        "prompt_or_source_record": "drawn with code primitives; no image-generation tool used; design follows src/assets/bag1.png / bag2.png reference art"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "cu_pk_shirt_white_3",
+      "role": "HQ package: white T-shirt, level 3 chest design (shape cluster)",
+      "path": "src/assets/generated/closeup/cu_pk_shirt_white_3.png",
+      "status": "approved-for-prototype",
+      "technical": {
+        "dimensions": "24x24",
+        "alpha": true,
+        "anchor": "center",
+        "frames": 1,
+        "filtering": "nearest",
+        "display_scale": 2
+      },
+      "visual_locks": [
+        "16-colour palette (tools/generate-assets.mjs P)",
+        "top-left light",
+        "dark-violet outline #2b2438",
+        "top-down view"
+      ],
+      "source": {
+        "kind": "authored-procedural",
+        "url_or_tool": "tools/generate-assets.mjs",
+        "creator": "Claude Code (session with project owner)",
+        "created_at": "2026-10-24",
+        "license": "project-owned, generated from code",
+        "attribution": "",
+        "prompt_or_source_record": "drawn with code primitives; no image-generation tool used; design follows src/assets/bag1.png / bag2.png reference art"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "cu_pk_sticker",
+      "role": "HQ package: sticker sheet",
+      "path": "src/assets/generated/closeup/cu_pk_sticker.png",
+      "status": "approved-for-prototype",
+      "technical": {
+        "dimensions": "16x14",
+        "alpha": true,
+        "anchor": "center",
+        "frames": 1,
+        "filtering": "nearest",
+        "display_scale": 2
+      },
+      "visual_locks": [
+        "16-colour palette (tools/generate-assets.mjs P)",
+        "top-left light",
+        "dark-violet outline #2b2438",
+        "top-down view"
+      ],
+      "source": {
+        "kind": "authored-procedural",
+        "url_or_tool": "tools/generate-assets.mjs",
+        "creator": "Claude Code (session with project owner)",
+        "created_at": "2026-10-24",
+        "license": "project-owned, generated from code",
+        "attribution": "",
+        "prompt_or_source_record": "drawn with code primitives; no image-generation tool used"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "cu_scrap",
+      "role": "Scrap paper for the ink test",
+      "path": "src/assets/generated/closeup/cu_scrap.png",
+      "status": "approved-for-prototype",
+      "technical": {
+        "dimensions": "28x34",
+        "alpha": true,
+        "anchor": "center",
+        "frames": 1,
+        "filtering": "nearest",
+        "display_scale": 2
+      },
+      "visual_locks": [
+        "16-colour palette (tools/generate-assets.mjs P)",
+        "top-left light",
+        "dark-violet outline #2b2438",
+        "top-down view"
+      ],
+      "source": {
+        "kind": "authored-procedural",
+        "url_or_tool": "tools/generate-assets.mjs",
+        "creator": "Claude Code (session with project owner)",
+        "created_at": "2026-10-24",
+        "license": "project-owned, generated from code",
+        "attribution": "",
+        "prompt_or_source_record": "drawn with code primitives; no image-generation tool used"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "cu_sticky",
+      "role": "Sticky note (text drawn by the scene)",
+      "path": "src/assets/generated/closeup/cu_sticky.png",
+      "status": "approved-for-prototype",
+      "technical": {
+        "dimensions": "105x58",
+        "alpha": true,
+        "anchor": "center",
+        "frames": 1,
+        "filtering": "nearest",
+        "display_scale": 2
+      },
+      "visual_locks": [
+        "16-colour palette (tools/generate-assets.mjs P)",
+        "top-left light",
+        "dark-violet outline #2b2438",
+        "top-down view"
+      ],
+      "source": {
+        "kind": "authored-procedural",
+        "url_or_tool": "tools/generate-assets.mjs",
+        "creator": "Claude Code (session with project owner)",
+        "created_at": "2026-10-24",
+        "license": "project-owned, generated from code",
+        "attribution": "",
+        "prompt_or_source_record": "drawn with code primitives; no image-generation tool used"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "cu_tray",
+      "role": "Paper tray: 5 pack slots",
+      "path": "src/assets/generated/closeup/cu_tray.png",
+      "status": "approved-for-prototype",
+      "technical": {
+        "dimensions": "130x34",
+        "alpha": true,
+        "anchor": "center",
+        "frames": 1,
+        "filtering": "nearest",
+        "display_scale": 2
+      },
+      "visual_locks": [
+        "16-colour palette (tools/generate-assets.mjs P)",
+        "top-left light",
+        "dark-violet outline #2b2438",
+        "top-down view"
+      ],
+      "source": {
+        "kind": "authored-procedural",
+        "url_or_tool": "tools/generate-assets.mjs",
+        "creator": "Claude Code (session with project owner)",
+        "created_at": "2026-10-24",
+        "license": "project-owned, generated from code",
+        "attribution": "",
+        "prompt_or_source_record": "drawn with code primitives; no image-generation tool used"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": ""
+      }
+    },
+    {
+      "id": "cu_desk_tile",
+      "role": "Close-up background: the room floor tile, seamless (3x3 repeat checked)",
+      "path": "src/assets/generated/cu_desk_tile.png",
+      "status": "approved-for-prototype",
+      "technical": {
+        "dimensions": "32x32",
+        "alpha": false,
+        "anchor": "tile",
+        "frames": 1,
+        "filtering": "nearest",
+        "display_scale": 2
+      },
+      "visual_locks": [
+        "16-colour palette (tools/generate-assets.mjs P)",
+        "top-left light",
+        "dark-violet outline #2b2438",
+        "top-down view"
+      ],
+      "source": {
+        "kind": "authored-procedural",
+        "url_or_tool": "tools/generate-assets.mjs",
+        "creator": "Claude Code (session with project owner)",
+        "created_at": "2026-10-24",
+        "license": "project-owned, generated from code",
+        "attribution": "",
+        "prompt_or_source_record": "drawn with code primitives; no image-generation tool used"
+      },
+      "verification": {
+        "native_scale_reviewed": true,
+        "in_engine_reviewed": true,
+        "technical_checks_passed": true,
+        "approved_by": ""
+      }
+    }
+  ]
+}

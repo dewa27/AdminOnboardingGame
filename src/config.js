@@ -2,6 +2,9 @@ import Phaser from 'phaser';
 import { BootScene } from './scenes/BootScene.js';
 import { Episode1Scene } from './scenes/Episode1Scene.js';
 import { Episode2Scene } from './scenes/Episode2Scene.js';
+import { DeskCloseUpScene } from './scenes/DeskCloseUpScene.js';
+import { PackageUnpackScene } from './scenes/PackageUnpackScene.js';
+import { ClassroomSeatingScene } from './scenes/ClassroomSeatingScene.js';
 
 // Phaser game config. The room is small (640x480) so it fits comfortably in
 // the existing single-file layout. `pixelArt: true` keeps placeholder coloured
@@ -25,7 +28,7 @@ export const config = {
   // plain strings here used to silently produce broken scene entries with no
   // `.sys`, crashing SceneManager.bootQueue on game boot (which is what made
   // clicking Episode 1 / Episode 2 show a blank overlay).
-  scene: [BootScene, Episode1Scene, Episode2Scene],
+  scene: [BootScene, Episode1Scene, Episode2Scene, DeskCloseUpScene, PackageUnpackScene, ClassroomSeatingScene],
   scale: {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH

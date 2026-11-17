@@ -5,8 +5,14 @@
 // Episode 1 scene. (The BootScene already runs once on Phaser boot, so the
 // scenes are warm — we just call scene.start() to begin them.)
 import { overlay } from './overlay.js';
+import { gameState } from '../state/gameState.js';
+import { clearGame } from '../state/storage.js';
 
 export function showStart() {
+  const name = gameState.playerName || 'Admin';
+  const ep1Done = gameState.progress.episode1Complete;
+  const ep2Done = gameState.progress.episode2Complete;
+
   overlay.show(`
     <div class="ov-frame">
       <div class="ov-topbar">
@@ -14,17 +20,18 @@ export function showStart() {
         <span class="badge">ADMIN ONBOARDING SIM</span>
       </div>
       <div class="start-screen">
-        <h1 class="title">Hari Pertama Jadi Admin</h1>
+        <h1 class="title">Halo, ${escapeHtml(name)}!</h1>
         <p class="sub">Simulasi peran Admin Cabang Timedoor Academy. Pilih episode untuk mulai.</p>
         <button class="ep-btn" data-ep="1">
-          <strong>Episode 1 — Persiapan Cabang</strong>
-          <span>Checklist kesiapan stationeries, merch, dan ruang kelas.</span>
+          <strong>Episode 1 — Persiapan Cabang${ep1Done ? ' ✓' : ''}</strong>
+          <span>Cek paket kiriman HQ dan siapkan ruang kelas.</span>
         </button>
         <button class="ep-btn" data-ep="2">
-          <strong>Episode 2 — Balas Chat Customer</strong>
+          <strong>Episode 2 — Balas Chat Customer${ep2Done ? ' ✓' : ''}</strong>
           <span>Layani 4 calon customer, arahkan mereka daftar Free Trial.</span>
         </button>
         <p class="footer-note">Catatan: prototype, asset visual masih placeholder.</p>
+        <p class="footer-note"><a href="#" id="reset-player">Bukan ${escapeHtml(name)}? Ganti pemain</a></p>
       </div>
     </div>
   `);
@@ -39,6 +46,18 @@ export function showStart() {
       else if (ep === '2') startEpisode2();
     });
   });
+
+  document.getElementById('reset-player').addEventListener('click', (e) => {
+    e.preventDefault();
+    clearGame();
+    window.location.reload();
+  });
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  })[c]);
 }
 
 // All scene keys registered in config.js. Used to defensively stop whatever
@@ -46,7 +65,7 @@ export function showStart() {
 // Phaser's SceneManager has no `getActiveKey()` (that was a bug: calling it
 // threw a TypeError and silently aborted the scene switch, leaving the
 // overlay hidden and the canvas on whatever BootScene had drawn).
-const ALL_SCENE_KEYS = ['BootScene', 'Episode1Scene', 'Episode2Scene'];
+const ALL_SCENE_KEYS = ['BootScene', 'Episode1Scene', 'Episode2Scene', 'DeskCloseUpScene', 'PackageUnpackScene', 'ClassroomSeatingScene'];
 
 function stopAllExcept(game, keep) {
   ALL_SCENE_KEYS.forEach(key => {

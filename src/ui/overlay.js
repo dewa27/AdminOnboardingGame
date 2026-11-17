@@ -8,7 +8,7 @@
 //     while reading a checklist
 //
 // Views don't have to use this API directly — the helpers in dialogue.js,
-// checklist.js, chat.js, summary.js wrap the show/hide lifecycle so callers
+// inspect.js, chat.js, summary.js wrap the show/hide lifecycle so callers
 // just provide an "onDone" callback.
 let rootEl = null;
 
